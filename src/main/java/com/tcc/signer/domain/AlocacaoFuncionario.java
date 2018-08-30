@@ -42,18 +42,14 @@ public class AlocacaoFuncionario implements Serializable{
 		this.descricacao = descricacao;
 	}
 
-
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((descricacao == null) ? 0 : descricacao.hashCode());
 		result = prime * result + ((idAlocacaoFuncionario == null) ? 0 : idAlocacaoFuncionario.hashCode());
 		return result;
 	}
 
-	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -63,11 +59,6 @@ public class AlocacaoFuncionario implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		AlocacaoFuncionario other = (AlocacaoFuncionario) obj;
-		if (descricacao == null) {
-			if (other.descricacao != null)
-				return false;
-		} else if (!descricacao.equals(other.descricacao))
-			return false;
 		if (idAlocacaoFuncionario == null) {
 			if (other.idAlocacaoFuncionario != null)
 				return false;
@@ -76,4 +67,7 @@ public class AlocacaoFuncionario implements Serializable{
 		return true;
 	}
 
+
+
+	
 }

@@ -17,7 +17,7 @@ public class ProdutoDescricaoResource {
 	@Autowired
 	private ProdutoDescricaoService produtoDescricaoService;
 
-	@RequestMapping(value = "{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "{/id}", method = RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id) {
 		ProdutoDescricao obj = produtoDescricaoService.buscar(id);
 		return ResponseEntity.ok().body(obj);

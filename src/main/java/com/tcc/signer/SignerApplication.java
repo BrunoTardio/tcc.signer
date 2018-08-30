@@ -5,11 +5,13 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.tcc.signer.domain.AlocacaoFuncionario;
 import com.tcc.signer.domain.ProdutoDescricao;
 import com.tcc.signer.domain.StatusNotificacao;
 import com.tcc.signer.domain.StatusPagamento;
 import com.tcc.signer.domain.StatusPedido;
 import com.tcc.signer.domain.Usuario;
+import com.tcc.signer.repositories.AlocacaoFuncionarioRepository;
 import com.tcc.signer.repositories.ProdutoDescricaoRepository;
 import com.tcc.signer.repositories.StatusNotificacaoRepository;
 import com.tcc.signer.repositories.StatusPagamentoRepository;
@@ -30,6 +32,8 @@ public class SignerApplication implements CommandLineRunner {
 	private StatusNotificacaoRepository statusNotificacaoRepo;	
 	@Autowired
 	private ProdutoDescricaoRepository produtoDescricaoRepo;
+	@Autowired
+	private AlocacaoFuncionarioRepository alocacaoFuncionarioRepo;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(SignerApplication.class, args);
@@ -48,7 +52,11 @@ public class SignerApplication implements CommandLineRunner {
 		StatusNotificacao sn2 = new StatusNotificacao(null,"Fechado");
 		ProdutoDescricao pd1 = new ProdutoDescricao(null, "Midia Fisica");
 		ProdutoDescricao pd2 = new ProdutoDescricao(null, "Midia Digital");
+		AlocacaoFuncionario af1 = new AlocacaoFuncionario(null, "Operador");
+		AlocacaoFuncionario af2 = new AlocacaoFuncionario(null, "Caixa");
 		
+		alocacaoFuncionarioRepo.save(af1);
+		alocacaoFuncionarioRepo.save(af2);
 		produtoDescricaoRepo.save(pd1);
 		produtoDescricaoRepo.save(pd2);
 		statusNotificacaoRepo.save(sn2);
