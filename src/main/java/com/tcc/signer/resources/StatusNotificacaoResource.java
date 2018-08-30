@@ -1,6 +1,5 @@
 package com.tcc.signer.resources;
 
-import javax.persistence.Entity;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
