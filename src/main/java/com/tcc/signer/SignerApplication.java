@@ -5,14 +5,17 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.tcc.signer.domain.ProdutoDescricao;
 import com.tcc.signer.domain.StatusNotificacao;
 import com.tcc.signer.domain.StatusPagamento;
 import com.tcc.signer.domain.StatusPedido;
 import com.tcc.signer.domain.Usuario;
+import com.tcc.signer.repositories.ProdutoDescricaoRepository;
 import com.tcc.signer.repositories.StatusNotificacaoRepository;
 import com.tcc.signer.repositories.StatusPagamentoRepository;
 import com.tcc.signer.repositories.StatusPedidoRepository;
 import com.tcc.signer.repositories.UsuarioRepository;
+
 
 @SpringBootApplication
 public class SignerApplication implements CommandLineRunner {
@@ -25,6 +28,8 @@ public class SignerApplication implements CommandLineRunner {
 	private StatusPagamentoRepository statusPagamentoRepository;
 	@Autowired
 	private StatusNotificacaoRepository statusNotificacaoRepo;	
+	@Autowired
+	private ProdutoDescricaoRepository produtoDescricaoRepo;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(SignerApplication.class, args);
@@ -41,7 +46,11 @@ public class SignerApplication implements CommandLineRunner {
 		StatusPagamento spa2 = new StatusPagamento(null,"ABERTO");
 		StatusNotificacao sn1 = new StatusNotificacao(null,"Em aberto");
 		StatusNotificacao sn2 = new StatusNotificacao(null,"Fechado");
+		ProdutoDescricao pd1 = new ProdutoDescricao(null, "Midia Fisica");
+		ProdutoDescricao pd2 = new ProdutoDescricao(null, "Midia Digital");
 		
+		produtoDescricaoRepo.save(pd1);
+		produtoDescricaoRepo.save(pd2);
 		statusNotificacaoRepo.save(sn2);
 		statusNotificacaoRepo.save(sn1);
 		statusPagamentoRepository.save(spa1);

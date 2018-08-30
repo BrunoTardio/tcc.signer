@@ -41,12 +41,10 @@ public class ProdutoDescricao implements Serializable{
 		this.descricacao = descricacao;
 	}
 
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((descricacao == null) ? 0 : descricacao.hashCode());
 		result = prime * result + ((idProdutoDescricacao == null) ? 0 : idProdutoDescricacao.hashCode());
 		return result;
 	}
@@ -60,11 +58,6 @@ public class ProdutoDescricao implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		ProdutoDescricao other = (ProdutoDescricao) obj;
-		if (descricacao == null) {
-			if (other.descricacao != null)
-				return false;
-		} else if (!descricacao.equals(other.descricacao))
-			return false;
 		if (idProdutoDescricacao == null) {
 			if (other.idProdutoDescricacao != null)
 				return false;
@@ -72,7 +65,8 @@ public class ProdutoDescricao implements Serializable{
 			return false;
 		return true;
 	}
-	
+
+
 	
 	
 	
