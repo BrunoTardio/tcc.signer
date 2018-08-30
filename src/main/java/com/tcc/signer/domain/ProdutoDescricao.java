@@ -7,31 +7,34 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
-public class AlocacaoFuncionario implements Serializable{
+@Entity	
+public class ProdutoDescricao implements Serializable{
+
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer idAlocacaoFuncionario;
+	private Integer idProdutoDescricacao;
 	
 	private String descricacao;
 	
-	public AlocacaoFuncionario() {}
-	
-	public AlocacaoFuncionario(Integer idAlocacaoFuncionario, String descricacao) {
+	public ProdutoDescricao() {}
+
+	public ProdutoDescricao(Integer idProdutoDescricacao, String descricacao) {
 		super();
-		this.idAlocacaoFuncionario = idAlocacaoFuncionario;
+		this.idProdutoDescricacao = idProdutoDescricacao;
 		this.descricacao = descricacao;
 	}
 
-
-	public Integer getIdAlocacaoFuncionario() {
-		return idAlocacaoFuncionario;
+	public Integer getIdProdutoDescricacao() {
+		return idProdutoDescricacao;
 	}
 
-	public void setIdAlocacaoFuncionario(Integer idAlocacaoFuncionario) {
-		this.idAlocacaoFuncionario = idAlocacaoFuncionario;
+	public void setIdProdutoDescricacao(Integer idProdutoDescricacao) {
+		this.idProdutoDescricacao = idProdutoDescricacao;
 	}
 
 	public String getDescricacao() {
@@ -43,17 +46,15 @@ public class AlocacaoFuncionario implements Serializable{
 	}
 
 
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((descricacao == null) ? 0 : descricacao.hashCode());
-		result = prime * result + ((idAlocacaoFuncionario == null) ? 0 : idAlocacaoFuncionario.hashCode());
+		result = prime * result + ((idProdutoDescricacao == null) ? 0 : idProdutoDescricacao.hashCode());
 		return result;
 	}
 
-	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -62,18 +63,23 @@ public class AlocacaoFuncionario implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		AlocacaoFuncionario other = (AlocacaoFuncionario) obj;
+		ProdutoDescricao other = (ProdutoDescricao) obj;
 		if (descricacao == null) {
 			if (other.descricacao != null)
 				return false;
 		} else if (!descricacao.equals(other.descricacao))
 			return false;
-		if (idAlocacaoFuncionario == null) {
-			if (other.idAlocacaoFuncionario != null)
+		if (idProdutoDescricacao == null) {
+			if (other.idProdutoDescricacao != null)
 				return false;
-		} else if (!idAlocacaoFuncionario.equals(other.idAlocacaoFuncionario))
+		} else if (!idProdutoDescricacao.equals(other.idProdutoDescricacao))
 			return false;
 		return true;
 	}
-
+	
+	
+	
+	
+	
+	
 }
