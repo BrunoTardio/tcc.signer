@@ -14,7 +14,6 @@ public class StatusPedido implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idStatusPedido;
-	
 	private String descricaoPedido;
 	
 	public StatusPedido() {}
@@ -47,7 +46,6 @@ public class StatusPedido implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((descricaoPedido == null) ? 0 : descricaoPedido.hashCode());
 		result = prime * result + ((idStatusPedido == null) ? 0 : idStatusPedido.hashCode());
 		return result;
 	}
@@ -62,11 +60,6 @@ public class StatusPedido implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		StatusPedido other = (StatusPedido) obj;
-		if (descricaoPedido == null) {
-			if (other.descricaoPedido != null)
-				return false;
-		} else if (!descricaoPedido.equals(other.descricaoPedido))
-			return false;
 		if (idStatusPedido == null) {
 			if (other.idStatusPedido != null)
 				return false;
@@ -74,5 +67,8 @@ public class StatusPedido implements Serializable {
 			return false;
 		return true;
 	}
+
+
+
 
 }
