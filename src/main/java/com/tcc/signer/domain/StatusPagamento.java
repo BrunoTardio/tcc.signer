@@ -52,7 +52,6 @@ public class StatusPagamento implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((descricacaoPagamento == null) ? 0 : descricacaoPagamento.hashCode());
 		result = prime * result + ((idStatusPagamento == null) ? 0 : idStatusPagamento.hashCode());
 		return result;
 	}
@@ -67,11 +66,6 @@ public class StatusPagamento implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		StatusPagamento other = (StatusPagamento) obj;
-		if (descricacaoPagamento == null) {
-			if (other.descricacaoPagamento != null)
-				return false;
-		} else if (!descricacaoPagamento.equals(other.descricacaoPagamento))
-			return false;
 		if (idStatusPagamento == null) {
 			if (other.idStatusPagamento != null)
 				return false;
@@ -79,8 +73,5 @@ public class StatusPagamento implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
-	
 
 }
