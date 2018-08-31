@@ -22,7 +22,7 @@ public class ProdutoDescricao implements Serializable{
 	
 	private String descricacao;
 	
-	
+	@JsonManagedReference
 	@ManyToMany(mappedBy="produtoDescricoes")
 	private List<Produto> produtos = new ArrayList<>();
 	
