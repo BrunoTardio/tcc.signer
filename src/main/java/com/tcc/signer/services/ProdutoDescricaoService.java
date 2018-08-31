@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.tcc.signer.domain.ProdutoDescricao;
 import com.tcc.signer.repositories.ProdutoDescricaoRepository;
+import com.tcc.signer.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class ProdutoDescricaoService {
@@ -16,7 +17,10 @@ public class ProdutoDescricaoService {
 
 	public ProdutoDescricao buscar(Integer id) {
 		Optional<ProdutoDescricao> obj = produtoDescricaoRepo.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObjectNotFoundException( 
+				"Objeto não encontrado! Id: " + id + ", Tipo: " + ProdutoDescricao.class.getName())); 
 	}
+	
+	
 
 }
