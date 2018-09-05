@@ -1,7 +1,7 @@
 package com.tcc.signer;
 
 
-import java.util.ArrayList;
+
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +12,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.tcc.signer.domain.AlocacaoFuncionario;
 import com.tcc.signer.domain.Produto;
 import com.tcc.signer.domain.ProdutoDescricao;
-import com.tcc.signer.domain.ProdutoDetalhe;
+
 import com.tcc.signer.domain.ProdutoTipo;
 import com.tcc.signer.domain.ProdutoValidade;
 import com.tcc.signer.domain.StatusNotificacao;
 import com.tcc.signer.domain.StatusPagamento;
 import com.tcc.signer.domain.StatusPedido;
+import com.tcc.signer.domain.Telefone;
 import com.tcc.signer.domain.Usuario;
 import com.tcc.signer.repositories.AlocacaoFuncionarioRepository;
 import com.tcc.signer.repositories.ProdutoDescricaoRepository;
@@ -27,6 +28,7 @@ import com.tcc.signer.repositories.ProdutoValidadeRepository;
 import com.tcc.signer.repositories.StatusNotificacaoRepository;
 import com.tcc.signer.repositories.StatusPagamentoRepository;
 import com.tcc.signer.repositories.StatusPedidoRepository;
+import com.tcc.signer.repositories.TelefoneRepository;
 import com.tcc.signer.repositories.UsuarioRepository;
 
 
@@ -51,7 +53,8 @@ public class SignerApplication implements CommandLineRunner {
 	private ProdutoTipoRepository produtoTipoRepo;
 	@Autowired
 	private ProdutoValidadeRepository produtoValidadeRepo;
-	
+	@Autowired
+	private TelefoneRepository telefoneRepo;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(SignerApplication.class, args);
@@ -60,8 +63,7 @@ public class SignerApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
-		Usuario user1 = new Usuario(null, "tardio@","123");
-		Usuario user2 = new Usuario(null, "xxxxx@","123");
+	
 		StatusPedido sp1 = new StatusPedido(null,"BOLETO");
 		StatusPedido sp2 = new StatusPedido(null,"DCC");
 		StatusPagamento spa1 = new StatusPagamento(null,"PAGOU");
@@ -88,13 +90,17 @@ public class SignerApplication implements CommandLineRunner {
 		statusPagamentoRepository.save(spa2);
 		statusPedidoRepository.save(sp1);
 		statusPedidoRepository.save(sp2);
-		usuarioRepository.save(user1);
-		usuarioRepository.save(user2);
+	
 		
 		// TESTANDO UM PARA MUITOS 000
+		Usuario user1 = new Usuario(null, "tardio@","123");
+		Usuario user2 = new Usuario(null, "xxxxx@","123");
+		Telefone t1 = new Telefone(null,"329889992896","residencial",user1);
+		
 		ProdutoValidade pv1 = new ProdutoValidade(null,"03 MESES");
 		ProdutoTipo pt1 = new ProdutoTipo(null,"CPF");
 		ProdutoTipo pt2 = new ProdutoTipo(null,"CNPJ");
+		
 		produtoTipoRepo.saveAll(Arrays.asList(pt1,pt2));
 		produtoValidadeRepo.saveAll(Arrays.asList(pv1));
 		
@@ -108,10 +114,12 @@ public class SignerApplication implements CommandLineRunner {
 		pt1.getProdutos().addAll(Arrays.asList(p1,p2));
 		pt1.getProdutos().addAll(Arrays.asList(p3));
 		pv1.getProdutos().addAll(Arrays.asList(p1));
+		user1.getTelefones().addAll(Arrays.asList(t1));
 		
 		produtoRepo.saveAll(Arrays.asList(p1,p2,p3));
-		
-		
+		usuarioRepository.save(user1);
+		usuarioRepository.save(user2);
+		telefoneRepo.saveAll(Arrays.asList(t1));
 		
 	}
 }
