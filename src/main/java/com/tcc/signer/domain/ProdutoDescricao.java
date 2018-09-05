@@ -8,22 +8,25 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-@Entity	
-public class ProdutoDescricao implements Serializable{
+@Entity
+public class ProdutoDescricao implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer idProdutoDescricacao;
-	
-	private String descricacao;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer idProdutoDescricacao;
+
+	private String descricacao;
 	
-	public ProdutoDescricao() {}
+	
+	@OneToMany(mappedBy="produtoDescricao")// atributo que esta sendo mapeado
+	private List<Produto> produtos = new ArrayList<>();
+
+	public ProdutoDescricao() {
+	}
 
 	public ProdutoDescricao(Integer idProdutoDescricacao, String descricacao) {
 		super();
@@ -47,8 +50,14 @@ public class ProdutoDescricao implements Serializable{
 		this.descricacao = descricacao;
 	}
 
+	public List<Produto> getProdutos() {
+		return produtos;
+	}
 
-	
+	public void setProdutos(List<Produto> produtos) {
+		this.produtos = produtos;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -74,7 +83,4 @@ public class ProdutoDescricao implements Serializable{
 		return true;
 	}
 
-
-
-	
 }

@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.tcc.signer.domain.AlocacaoFuncionario;
 import com.tcc.signer.domain.Produto;
 import com.tcc.signer.domain.ProdutoDescricao;
+import com.tcc.signer.domain.ProdutoDetalhe;
 import com.tcc.signer.domain.StatusNotificacao;
 import com.tcc.signer.domain.StatusPagamento;
 import com.tcc.signer.domain.StatusPedido;
@@ -40,7 +41,8 @@ public class SignerApplication implements CommandLineRunner {
 	@Autowired
 	private AlocacaoFuncionarioRepository alocacaoFuncionarioRepo;
 	@Autowired
-	private ProdutoRepository produtoRepository;
+	private ProdutoRepository produtoRepo;
+	
 	
 	public static void main(String[] args) {
 		SpringApplication.run(SignerApplication.class, args);
@@ -57,19 +59,26 @@ public class SignerApplication implements CommandLineRunner {
 		StatusPagamento spa2 = new StatusPagamento(null,"ABERTO");
 		StatusNotificacao sn1 = new StatusNotificacao(null,"Em aberto");
 		StatusNotificacao sn2 = new StatusNotificacao(null,"Fechado");
-		ProdutoDescricao pd1 = new ProdutoDescricao(null, "Midia Fisica");
-		ProdutoDescricao pd2 = new ProdutoDescricao(null, "Midia Digital");
 		AlocacaoFuncionario af1 = new AlocacaoFuncionario(null, "Operador");
 		AlocacaoFuncionario af2 = new AlocacaoFuncionario(null, "Caixa");
-		
 	
 		
-
+		ProdutoDescricao pd1 = new ProdutoDescricao(null, "Midia Fisica");
+		ProdutoDescricao pd2 = new ProdutoDescricao(null, "Midia Digital");
+		Produto p1 = new Produto(null,"ACC - AA PF", 50.00 , pd1);
+		Produto p2 = new Produto(null,"ACC - AA JF", 50.00 , pd1);
+		Produto p3 = new Produto(null,"ACC - AA JF", 50.00 , pd2);
+		
+		pd1.getProdutos().addAll(Arrays.asList(p1,p2));
+		pd2.getProdutos().addAll(Arrays.asList(p2));
+		
+	
 		
 		alocacaoFuncionarioRepo.save(af1);
 		alocacaoFuncionarioRepo.save(af2);
 		produtoDescricaoRepo.save(pd1);
 		produtoDescricaoRepo.save(pd2);
+		produtoRepo.saveAll(Arrays.asList(p1,p2,p3));
 		statusNotificacaoRepo.save(sn2);
 		statusNotificacaoRepo.save(sn1);
 		statusPagamentoRepository.save(spa1);
@@ -78,6 +87,8 @@ public class SignerApplication implements CommandLineRunner {
 		statusPedidoRepository.save(sp2);
 		usuarioRepository.save(user1);
 		usuarioRepository.save(user2);
+		
+		
 		
 		
 	}

@@ -1,45 +1,41 @@
 package com.tcc.signer.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
+import javax.persistence.ManyToOne;
 
 
 
 @Entity
-public class Produto  implements Serializable{
+public class Produto implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
 	private Double preco;
-	//private ProdutoValidade produtoValidade;
 	
+	@ManyToOne
+	@JoinColumn(name="produtoDescricao_id")
+	private ProdutoDescricao produtoDescricao;// atributo mapeado
 
 	public Produto() {
-		
+
 	}
 
-	public Produto(Integer id, String nome, Double preco) {
+	public Produto(Integer id, String nome, Double preco, ProdutoDescricao produtoDescricao) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.preco = preco;
+		this.produtoDescricao = produtoDescricao;
 	}
 
 	public Integer getId() {
@@ -66,7 +62,13 @@ public class Produto  implements Serializable{
 		this.preco = preco;
 	}
 
+	public ProdutoDescricao getProdutoDescricao() {
+		return produtoDescricao;
+	}
 
+	public void setProdutoDescricao(ProdutoDescricao produtoDescricao) {
+		this.produtoDescricao = produtoDescricao;
+	}
 
 	@Override
 	public int hashCode() {
@@ -92,9 +94,5 @@ public class Produto  implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
-	
-	
-	
+
 }
