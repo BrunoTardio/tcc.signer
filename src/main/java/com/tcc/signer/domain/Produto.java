@@ -30,6 +30,10 @@ public class Produto implements Serializable {
 	@JoinColumn(name="produtoTipoId")
 	private ProdutoTipo produtoTipo;
 	
+	@ManyToOne
+	@JoinColumn(name="produtoValidadeId")
+	private ProdutoValidade produtoValidade;
+	
 	
 
 	public Produto() {
@@ -37,13 +41,14 @@ public class Produto implements Serializable {
 	}
 
 	public Produto(Integer id, String nome, Double preco, ProdutoDescricao produtoDescricao,
-			ProdutoTipo produtoTipo) {
+			ProdutoTipo produtoTipo,ProdutoValidade produtoValidade) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.preco = preco;
 		this.produtoDescricao = produtoDescricao;
 		this.produtoTipo = produtoTipo;
+		this.produtoValidade = produtoValidade;
 	}
 
 	public Integer getId() {
@@ -84,6 +89,16 @@ public class Produto implements Serializable {
 
 	public void setProdutoTipo(ProdutoTipo produtoTipo) {
 		this.produtoTipo = produtoTipo;
+	}
+	
+	
+
+	public ProdutoValidade getProdutoValidade() {
+		return produtoValidade;
+	}
+
+	public void setProdutoValidade(ProdutoValidade produtoValidade) {
+		this.produtoValidade = produtoValidade;
 	}
 
 	@Override

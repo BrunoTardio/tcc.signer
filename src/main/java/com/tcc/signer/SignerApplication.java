@@ -14,6 +14,7 @@ import com.tcc.signer.domain.Produto;
 import com.tcc.signer.domain.ProdutoDescricao;
 import com.tcc.signer.domain.ProdutoDetalhe;
 import com.tcc.signer.domain.ProdutoTipo;
+import com.tcc.signer.domain.ProdutoValidade;
 import com.tcc.signer.domain.StatusNotificacao;
 import com.tcc.signer.domain.StatusPagamento;
 import com.tcc.signer.domain.StatusPedido;
@@ -22,6 +23,7 @@ import com.tcc.signer.repositories.AlocacaoFuncionarioRepository;
 import com.tcc.signer.repositories.ProdutoDescricaoRepository;
 import com.tcc.signer.repositories.ProdutoRepository;
 import com.tcc.signer.repositories.ProdutoTipoRepository;
+import com.tcc.signer.repositories.ProdutoValidadeRepository;
 import com.tcc.signer.repositories.StatusNotificacaoRepository;
 import com.tcc.signer.repositories.StatusPagamentoRepository;
 import com.tcc.signer.repositories.StatusPedidoRepository;
@@ -47,6 +49,8 @@ public class SignerApplication implements CommandLineRunner {
 	private ProdutoRepository produtoRepo;
 	@Autowired
 	private ProdutoTipoRepository produtoTipoRepo;
+	@Autowired
+	private ProdutoValidadeRepository produtoValidadeRepo;
 	
 	
 	public static void main(String[] args) {
@@ -88,19 +92,22 @@ public class SignerApplication implements CommandLineRunner {
 		usuarioRepository.save(user2);
 		
 		// TESTANDO UM PARA MUITOS 000
-		
+		ProdutoValidade pv1 = new ProdutoValidade(null,"03 MESES");
 		ProdutoTipo pt1 = new ProdutoTipo(null,"CPF");
 		ProdutoTipo pt2 = new ProdutoTipo(null,"CNPJ");
 		produtoTipoRepo.saveAll(Arrays.asList(pt1,pt2));
+		produtoValidadeRepo.saveAll(Arrays.asList(pv1));
 		
-		Produto p1 = new Produto(null,"ACC - AA PF", 50.00 , pd1,pt1);
-		Produto p2 = new Produto(null,"ACC - AA JF", 50.00 , pd1,pt1);
-		Produto p3 = new Produto(null,"ACC - AA JF", 50.00 , pd2,pt2);
+		
+		Produto p1 = new Produto(null,"ACC - AA PF", 50.00 , pd1,pt1,pv1);
+		Produto p2 = new Produto(null,"ACC - AA JF", 50.00 , pd1,pt1,null);
+		Produto p3 = new Produto(null,"ACC - AA JF", 50.00 , pd2,pt2,null);
 		
 		pd1.getProdutos().addAll(Arrays.asList(p1,p2));
 		pd2.getProdutos().addAll(Arrays.asList(p2));
 		pt1.getProdutos().addAll(Arrays.asList(p1,p2));
 		pt1.getProdutos().addAll(Arrays.asList(p3));
+		pv1.getProdutos().addAll(Arrays.asList(p1));
 		
 		produtoRepo.saveAll(Arrays.asList(p1,p2,p3));
 		
