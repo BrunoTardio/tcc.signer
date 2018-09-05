@@ -1,6 +1,7 @@
 package com.tcc.signer;
 
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import com.tcc.signer.domain.AlocacaoFuncionario;
 import com.tcc.signer.domain.Produto;
 import com.tcc.signer.domain.ProdutoDescricao;
 import com.tcc.signer.domain.ProdutoDetalhe;
+import com.tcc.signer.domain.ProdutoTipo;
 import com.tcc.signer.domain.StatusNotificacao;
 import com.tcc.signer.domain.StatusPagamento;
 import com.tcc.signer.domain.StatusPedido;
@@ -19,6 +21,7 @@ import com.tcc.signer.domain.Usuario;
 import com.tcc.signer.repositories.AlocacaoFuncionarioRepository;
 import com.tcc.signer.repositories.ProdutoDescricaoRepository;
 import com.tcc.signer.repositories.ProdutoRepository;
+import com.tcc.signer.repositories.ProdutoTipoRepository;
 import com.tcc.signer.repositories.StatusNotificacaoRepository;
 import com.tcc.signer.repositories.StatusPagamentoRepository;
 import com.tcc.signer.repositories.StatusPedidoRepository;
@@ -42,6 +45,8 @@ public class SignerApplication implements CommandLineRunner {
 	private AlocacaoFuncionarioRepository alocacaoFuncionarioRepo;
 	@Autowired
 	private ProdutoRepository produtoRepo;
+	@Autowired
+	private ProdutoTipoRepository produtoTipoRepo;
 	
 	
 	public static void main(String[] args) {
@@ -65,20 +70,14 @@ public class SignerApplication implements CommandLineRunner {
 		
 		ProdutoDescricao pd1 = new ProdutoDescricao(null, "Midia Fisica");
 		ProdutoDescricao pd2 = new ProdutoDescricao(null, "Midia Digital");
-		Produto p1 = new Produto(null,"ACC - AA PF", 50.00 , pd1);
-		Produto p2 = new Produto(null,"ACC - AA JF", 50.00 , pd1);
-		Produto p3 = new Produto(null,"ACC - AA JF", 50.00 , pd2);
-		
-		pd1.getProdutos().addAll(Arrays.asList(p1,p2));
-		pd2.getProdutos().addAll(Arrays.asList(p2));
-		
+	
 	
 		
 		alocacaoFuncionarioRepo.save(af1);
 		alocacaoFuncionarioRepo.save(af2);
 		produtoDescricaoRepo.save(pd1);
 		produtoDescricaoRepo.save(pd2);
-		produtoRepo.saveAll(Arrays.asList(p1,p2,p3));
+	
 		statusNotificacaoRepo.save(sn2);
 		statusNotificacaoRepo.save(sn1);
 		statusPagamentoRepository.save(spa1);
@@ -88,6 +87,22 @@ public class SignerApplication implements CommandLineRunner {
 		usuarioRepository.save(user1);
 		usuarioRepository.save(user2);
 		
+		// TESTANDO UM PARA MUITOS 000
+		
+		ProdutoTipo pt1 = new ProdutoTipo(null,"CPF");
+		ProdutoTipo pt2 = new ProdutoTipo(null,"CNPJ");
+		produtoTipoRepo.saveAll(Arrays.asList(pt1,pt2));
+		
+		Produto p1 = new Produto(null,"ACC - AA PF", 50.00 , pd1,pt1);
+		Produto p2 = new Produto(null,"ACC - AA JF", 50.00 , pd1,pt1);
+		Produto p3 = new Produto(null,"ACC - AA JF", 50.00 , pd2,pt2);
+		
+		pd1.getProdutos().addAll(Arrays.asList(p1,p2));
+		pd2.getProdutos().addAll(Arrays.asList(p2));
+		pt1.getProdutos().addAll(Arrays.asList(p1,p2));
+		pt1.getProdutos().addAll(Arrays.asList(p3));
+		
+		produtoRepo.saveAll(Arrays.asList(p1,p2,p3));
 		
 		
 		

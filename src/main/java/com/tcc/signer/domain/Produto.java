@@ -25,17 +25,25 @@ public class Produto implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="produtoDescricao_id")
 	private ProdutoDescricao produtoDescricao;// atributo mapeado
+	
+	@ManyToOne
+	@JoinColumn(name="produtoTipoId")
+	private ProdutoTipo produtoTipo;
+	
+	
 
 	public Produto() {
 
 	}
 
-	public Produto(Integer id, String nome, Double preco, ProdutoDescricao produtoDescricao) {
+	public Produto(Integer id, String nome, Double preco, ProdutoDescricao produtoDescricao,
+			ProdutoTipo produtoTipo) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.preco = preco;
 		this.produtoDescricao = produtoDescricao;
+		this.produtoTipo = produtoTipo;
 	}
 
 	public Integer getId() {
@@ -68,6 +76,14 @@ public class Produto implements Serializable {
 
 	public void setProdutoDescricao(ProdutoDescricao produtoDescricao) {
 		this.produtoDescricao = produtoDescricao;
+	}
+
+	public ProdutoTipo getProdutoTipo() {
+		return produtoTipo;
+	}
+
+	public void setProdutoTipo(ProdutoTipo produtoTipo) {
+		this.produtoTipo = produtoTipo;
 	}
 
 	@Override
