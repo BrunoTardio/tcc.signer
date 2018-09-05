@@ -21,12 +21,7 @@ public class ProdutoDescricao implements Serializable{
 	private Integer idProdutoDescricacao;
 	
 	private String descricacao;
-	
-	@JsonManagedReference
-	@ManyToMany(mappedBy="produtoDescricoes")
-	private List<Produto> produtos = new ArrayList<>();
-	
-	
+
 	
 	public ProdutoDescricao() {}
 
@@ -52,16 +47,7 @@ public class ProdutoDescricao implements Serializable{
 		this.descricacao = descricacao;
 	}
 
-	public List<Produto> getProdutos() {
-		return produtos;
-	}
 
-	public void setProdutos(List<Produto> produtos) {
-		this.produtos = produtos;
-	}
-
-
-	
 	
 	@Override
 	public int hashCode() {

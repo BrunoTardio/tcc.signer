@@ -62,17 +62,9 @@ public class SignerApplication implements CommandLineRunner {
 		AlocacaoFuncionario af1 = new AlocacaoFuncionario(null, "Operador");
 		AlocacaoFuncionario af2 = new AlocacaoFuncionario(null, "Caixa");
 		
-		Produto p1 = new Produto(null,"A3 - CPF ", 200.50);
-		Produto p2 = new Produto(null,"A2 - CPF ", 150.50);
-		Produto p3 = new Produto(null,"A1 - CNPJ ", 50.50);
+	
 		
-		pd1.getProdutos().addAll(Arrays.asList(p1,p2,p3));
-		pd2.getProdutos().addAll(Arrays.asList(p2));
-		
-		p1.getProdutoDescricoes().addAll(Arrays.asList(pd1));
-		p2.getProdutoDescricoes().addAll(Arrays.asList(pd1,pd2));
-		p3.getProdutoDescricoes().addAll(Arrays.asList(pd1));
-		
+
 		
 		alocacaoFuncionarioRepo.save(af1);
 		alocacaoFuncionarioRepo.save(af2);
@@ -86,7 +78,7 @@ public class SignerApplication implements CommandLineRunner {
 		statusPedidoRepository.save(sp2);
 		usuarioRepository.save(user1);
 		usuarioRepository.save(user2);
-		produtoRepository.saveAll(Arrays.asList(p1,p2,p3));
+		
 		
 	}
 }

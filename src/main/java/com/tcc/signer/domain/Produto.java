@@ -28,15 +28,9 @@ public class Produto  implements Serializable{
 	private Integer id;
 	private String nome;
 	private Double preco;
+	//private ProdutoValidade produtoValidade;
 	
-	@JsonBackReference
-	@ManyToMany
-	@JoinTable(name = "ProdutoProdutoDescricao",
-		joinColumns = @JoinColumn(name="produtoid"),
-		inverseJoinColumns = @JoinColumn(name = "categoriaid")	
-			)
-	private List<ProdutoDescricao> produtoDescricoes = new ArrayList<>();
-	
+
 	public Produto() {
 		
 	}
@@ -72,13 +66,7 @@ public class Produto  implements Serializable{
 		this.preco = preco;
 	}
 
-	public List<ProdutoDescricao> getProdutoDescricoes() {
-		return produtoDescricoes;
-	}
 
-	public void setProdutoDescricoes(List<ProdutoDescricao> produtoDescricoes) {
-		this.produtoDescricoes = produtoDescricoes;
-	}
 
 	@Override
 	public int hashCode() {
