@@ -20,6 +20,7 @@ import com.tcc.signer.domain.StatusPagamento;
 import com.tcc.signer.domain.StatusPedido;
 import com.tcc.signer.domain.Telefone;
 import com.tcc.signer.domain.Usuario;
+import com.tcc.signer.domain.UsuarioEmail;
 import com.tcc.signer.repositories.AlocacaoFuncionarioRepository;
 import com.tcc.signer.repositories.ProdutoDescricaoRepository;
 import com.tcc.signer.repositories.ProdutoRepository;
@@ -29,6 +30,7 @@ import com.tcc.signer.repositories.StatusNotificacaoRepository;
 import com.tcc.signer.repositories.StatusPagamentoRepository;
 import com.tcc.signer.repositories.StatusPedidoRepository;
 import com.tcc.signer.repositories.TelefoneRepository;
+import com.tcc.signer.repositories.UsuarioEmailRepository;
 import com.tcc.signer.repositories.UsuarioRepository;
 
 
@@ -55,6 +57,8 @@ public class SignerApplication implements CommandLineRunner {
 	private ProdutoValidadeRepository produtoValidadeRepo;
 	@Autowired
 	private TelefoneRepository telefoneRepo;
+	@Autowired
+	private UsuarioEmailRepository usuarioEmailRepo;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(SignerApplication.class, args);
@@ -96,6 +100,7 @@ public class SignerApplication implements CommandLineRunner {
 		Usuario user1 = new Usuario(null, "tardio@","123");
 		Usuario user2 = new Usuario(null, "xxxxx@","123");
 		Telefone t1 = new Telefone(null,"329889992896","residencial",user1);
+		UsuarioEmail ue1 = new UsuarioEmail(null, "Seu@seu", "Trabalho", user1);
 		
 		ProdutoValidade pv1 = new ProdutoValidade(null,"03 MESES");
 		ProdutoTipo pt1 = new ProdutoTipo(null,"CPF");
@@ -115,11 +120,13 @@ public class SignerApplication implements CommandLineRunner {
 		pt1.getProdutos().addAll(Arrays.asList(p3));
 		pv1.getProdutos().addAll(Arrays.asList(p1));
 		user1.getTelefones().addAll(Arrays.asList(t1));
-		
+		user1.getUsuarioEmails().addAll(Arrays.asList(ue1));
+	
 		produtoRepo.saveAll(Arrays.asList(p1,p2,p3));
 		usuarioRepository.save(user1);
 		usuarioRepository.save(user2);
 		telefoneRepo.saveAll(Arrays.asList(t1));
+		usuarioEmailRepo.saveAll(Arrays.asList(ue1));
 		
 	}
 }

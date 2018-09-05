@@ -10,21 +10,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-
 @Entity
 public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String login;
 	private String senha;
-	
-	@OneToMany(mappedBy="usuario")
+
+	@OneToMany(mappedBy = "usuario")
 	private List<Telefone> telefones = new ArrayList<>();
-	
-	
+
+	@OneToMany(mappedBy = "usuario")
+	private List<UsuarioEmail> usuarioEmails = new ArrayList<>();
 
 	public Usuario() {
 	}
@@ -60,15 +60,21 @@ public class Usuario implements Serializable {
 		this.senha = senha;
 	}
 
-	
-	
-	
 	public List<Telefone> getTelefones() {
 		return telefones;
 	}
 
 	public void setTelefones(List<Telefone> telefones) {
 		this.telefones = telefones;
+	}
+
+	
+	public List<UsuarioEmail> getUsuarioEmails() {
+		return usuarioEmails;
+	}
+
+	public void setUsuarioEmails(List<UsuarioEmail> usuarioEmails) {
+		this.usuarioEmails = usuarioEmails;
 	}
 
 	@Override
