@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class UsuarioEmail implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -19,6 +21,7 @@ public class UsuarioEmail implements Serializable{
 	private String email;
 	private String descricao;
 	
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name="usuarioId")
 	private Usuario usuario;
