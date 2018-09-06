@@ -1,8 +1,11 @@
 package com.tcc.signer.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import com.tcc.signer.domain.Pedido;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
@@ -28,6 +31,10 @@ public class PessoaJuridica implements Serializable{
 	@ElementCollection
 	@CollectionTable(name="TelefoneJuridica")
 	private Set<String> telefones = new HashSet<>();
+	
+	private List<Pedido> pedidos = new ArrayList<>();
+	
+	
 	
 	public PessoaJuridica() {}
 
@@ -88,6 +95,24 @@ public class PessoaJuridica implements Serializable{
 
 	public void setTributacao(String tributacao) {
 		this.tributacao = tributacao;
+	}
+	
+	
+
+	public Set<String> getTelefones() {
+		return telefones;
+	}
+
+	public void setTelefones(Set<String> telefones) {
+		this.telefones = telefones;
+	}
+
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
 	}
 
 	@Override
