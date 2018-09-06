@@ -1,7 +1,10 @@
 package com.tcc.signer.domain;
 
+import javax.persistence.Entity;
+
 import com.tcc.signer.domain.enums.EstadoPagamento;
 
+@Entity
 public class PagamentoComCartao extends Pagamento {
 	private static final long serialVersionUID = 1L;
 	

@@ -8,7 +8,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+
 
 @Entity
 public class Pedido implements Serializable {
@@ -19,6 +24,8 @@ public class Pedido implements Serializable {
 	private Integer id;
 	private Date instante;
 	
+	@ManyToOne
+	@JoinColumn(name="pessoaJuridicaId")
 	private PessoaJuridica pessoaJuridica;
 	
 	@OneToOne(cascade=CascadeType.ALL,mappedBy="pedido")
@@ -28,11 +35,10 @@ public class Pedido implements Serializable {
 
 	}
 
-	public Pedido(Integer id, Date instante, Pagamento pagamento, PessoaJuridica pessoaJuridica) {
+	public Pedido(Integer id, Date instante, PessoaJuridica pessoaJuridica) {
 		super();
 		this.id = id;
 		this.instante = instante;
-		this.pagamento = pagamento;
 		this.pessoaJuridica = pessoaJuridica;
 	}
 

@@ -13,6 +13,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class PessoaJuridica implements Serializable{
@@ -32,6 +34,7 @@ public class PessoaJuridica implements Serializable{
 	@CollectionTable(name="TelefoneJuridica")
 	private Set<String> telefones = new HashSet<>();
 	
+	@OneToMany(mappedBy="pessoaJuridica")
 	private List<Pedido> pedidos = new ArrayList<>();
 	
 	

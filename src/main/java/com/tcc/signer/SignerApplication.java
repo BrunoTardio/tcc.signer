@@ -2,6 +2,7 @@ package com.tcc.signer;
 
 
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.tcc.signer.domain.AlocacaoFuncionario;
+import com.tcc.signer.domain.Pagamento;
+import com.tcc.signer.domain.PagamentoComCartao;
+import com.tcc.signer.domain.Pedido;
 import com.tcc.signer.domain.Produto;
 import com.tcc.signer.domain.ProdutoDescricao;
 
@@ -21,8 +26,11 @@ import com.tcc.signer.domain.StatusPedido;
 import com.tcc.signer.domain.Telefone;
 import com.tcc.signer.domain.Usuario;
 import com.tcc.signer.domain.UsuarioEmail;
+import com.tcc.signer.domain.enums.EstadoPagamento;
 import com.tcc.signer.domain.enums.TipoProduto;
 import com.tcc.signer.repositories.AlocacaoFuncionarioRepository;
+import com.tcc.signer.repositories.PagamentoRepository;
+import com.tcc.signer.repositories.PedidoRepository;
 import com.tcc.signer.repositories.ProdutoDescricaoRepository;
 import com.tcc.signer.repositories.ProdutoRepository;
 import com.tcc.signer.repositories.ProdutoTipoRepository;
@@ -60,6 +68,10 @@ public class SignerApplication implements CommandLineRunner {
 	private TelefoneRepository telefoneRepo;
 	@Autowired
 	private UsuarioEmailRepository usuarioEmailRepo;
+	@Autowired
+	private PedidoRepository pedidoRepo;
+	@Autowired
+	private PagamentoRepository pagamentoRepo;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(SignerApplication.class, args);
@@ -128,6 +140,19 @@ public class SignerApplication implements CommandLineRunner {
 		usuarioRepository.save(user2);
 		telefoneRepo.saveAll(Arrays.asList(t1));
 		usuarioEmailRepo.saveAll(Arrays.asList(ue1));
+		
+		// TESTANDO UM PARA UM
+		
+		SimpleDateFormat stf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		
+		Pedido ped1 = new Pedido(null, stf.parse("30/09/2017 10:32"), null);
+		Pagamento pagto1 = new PagamentoComCartao(null,EstadoPagamento.QUITADO, 
+				ped1, 6);
+		ped1.setPagamento(pagto1);
+		// associar pessoa ao pedido depois
+		
+		pedidoRepo.saveAll(Arrays.asList(ped1));
+		pagamentoRepo.saveAll(Arrays.asList(pagto1));
 		
 	}
 }
