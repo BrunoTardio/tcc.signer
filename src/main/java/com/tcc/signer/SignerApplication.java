@@ -21,6 +21,7 @@ import com.tcc.signer.domain.StatusPedido;
 import com.tcc.signer.domain.Telefone;
 import com.tcc.signer.domain.Usuario;
 import com.tcc.signer.domain.UsuarioEmail;
+import com.tcc.signer.domain.enums.TipoProduto;
 import com.tcc.signer.repositories.AlocacaoFuncionarioRepository;
 import com.tcc.signer.repositories.ProdutoDescricaoRepository;
 import com.tcc.signer.repositories.ProdutoRepository;
@@ -110,9 +111,9 @@ public class SignerApplication implements CommandLineRunner {
 		produtoValidadeRepo.saveAll(Arrays.asList(pv1));
 		
 		
-		Produto p1 = new Produto(null,"ACC - AA PF", 50.00 , pd1,pt1,pv1);
-		Produto p2 = new Produto(null,"ACC - AA JF", 50.00 , pd1,pt1,null);
-		Produto p3 = new Produto(null,"ACC - AA JF", 50.00 , pd2,pt2,null);
+		Produto p1 = new Produto(null,"ACC - AA PF", 50.00 , pd1,pt1,pv1,TipoProduto.PESSOAFISICA);
+		Produto p2 = new Produto(null,"ACC - AA JF", 50.00 , pd1,pt1,null,TipoProduto.PESSOAFISICA);
+		Produto p3 = new Produto(null,"ACC - AA JF", 50.00 , pd2,pt2,null,TipoProduto.PESSOAFISICA);
 		
 		pd1.getProdutos().addAll(Arrays.asList(p1,p2));
 		pd2.getProdutos().addAll(Arrays.asList(p2));

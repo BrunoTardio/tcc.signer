@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.tcc.signer.domain.enums.TipoProduto;
+
 
 
 @Entity
@@ -21,6 +23,8 @@ public class Produto implements Serializable {
 	private Integer id;
 	private String nome;
 	private Double preco;
+	private Integer tipo;
+	
 	
 	@ManyToOne
 	@JoinColumn(name="produtoDescricao_id")
@@ -41,7 +45,7 @@ public class Produto implements Serializable {
 	}
 
 	public Produto(Integer id, String nome, Double preco, ProdutoDescricao produtoDescricao,
-			ProdutoTipo produtoTipo,ProdutoValidade produtoValidade) {
+			ProdutoTipo produtoTipo,ProdutoValidade produtoValidade, TipoProduto tipo) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -49,6 +53,7 @@ public class Produto implements Serializable {
 		this.produtoDescricao = produtoDescricao;
 		this.produtoTipo = produtoTipo;
 		this.produtoValidade = produtoValidade;
+		this.tipo = tipo.getCod();// ENUM
 	}
 
 	public Integer getId() {
@@ -99,6 +104,17 @@ public class Produto implements Serializable {
 
 	public void setProdutoValidade(ProdutoValidade produtoValidade) {
 		this.produtoValidade = produtoValidade;
+	}
+
+	
+	
+	// ENUM
+	public TipoProduto getTipo() {
+		return TipoProduto.toEnum(tipo);
+	}
+
+	public void setTipo(TipoProduto tipo) {
+		this.tipo = tipo.getCod();
 	}
 
 	@Override

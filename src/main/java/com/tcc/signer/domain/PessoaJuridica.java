@@ -1,7 +1,11 @@
 package com.tcc.signer.domain;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,6 +24,10 @@ public class PessoaJuridica implements Serializable{
 	private String cnpj;
 	private String inscricaoEstadual;
 	private String tributacao; // avaliar possibilidade de tabela
+	
+	@ElementCollection
+	@CollectionTable(name="TelefoneJuridica")
+	private Set<String> telefones = new HashSet<>();
 	
 	public PessoaJuridica() {}
 
