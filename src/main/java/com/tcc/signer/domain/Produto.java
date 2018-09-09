@@ -2,14 +2,16 @@ package com.tcc.signer.domain;
 
 import java.io.Serializable;
 
-
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.tcc.signer.domain.enums.TipoProduto;
 
 
@@ -25,20 +27,23 @@ public class Produto implements Serializable {
 	private Double preco;
 	private Integer tipo;
 	
-	
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name="produtoDescricao_id")
 	private ProdutoDescricao produtoDescricao;// atributo mapeado
 	
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name="produtoTipoId")
 	private ProdutoTipo produtoTipo;
 	
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name="produtoValidadeId")
 	private ProdutoValidade produtoValidade;
 	
-	
+	@OneToOne(cascade=CascadeType.ALL,mappedBy="produto")
+	private ProdutoDetalhe produtoDetalhe;
 
 	public Produto() {
 
@@ -108,6 +113,18 @@ public class Produto implements Serializable {
 
 	
 	
+	public ProdutoDetalhe getProdutoDetalhe() {
+		return produtoDetalhe;
+	}
+
+	public void setProdutoDetalhe(ProdutoDetalhe produtoDetalhe) {
+		this.produtoDetalhe = produtoDetalhe;
+	}
+
+	public void setTipo(Integer tipo) {
+		this.tipo = tipo;
+	}
+
 	// ENUM
 	public TipoProduto getTipo() {
 		return TipoProduto.toEnum(tipo);
