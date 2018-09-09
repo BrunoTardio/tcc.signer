@@ -42,6 +42,11 @@ public class Pedido implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "produtoId")
 	private Produto produto;
+	
+	@JsonBackReference
+	@ManyToOne
+	@JoinColumn(name = "statusPedidoId")
+	private StatusPedido statusPedido;
 
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")
 	private Pagamento pagamento;
@@ -51,7 +56,7 @@ public class Pedido implements Serializable {
 	}
 
 	public Pedido(Integer id, Date instante, PessoaJuridica pessoaJuridica, PessoaFisica pessoaFisica,
-			Funcionario funcionario, Produto produto) {
+			Funcionario funcionario, Produto produto,StatusPedido statusPedido) {
 		super();
 		this.id = id;
 		this.instante = instante;
@@ -59,6 +64,7 @@ public class Pedido implements Serializable {
 		this.pessoaFisica = pessoaFisica;
 		this.funcionario = funcionario;
 		this.produto = produto;
+		this.statusPedido = statusPedido;
 	}
 
 	public Integer getId() {
@@ -115,6 +121,14 @@ public class Pedido implements Serializable {
 
 	public void setProduto(Produto produto) {
 		this.produto = produto;
+	}
+
+	public StatusPedido getStatusPedido() {
+		return statusPedido;
+	}
+
+	public void setStatusPedido(StatusPedido statusPedido) {
+		this.statusPedido = statusPedido;
 	}
 
 	@Override

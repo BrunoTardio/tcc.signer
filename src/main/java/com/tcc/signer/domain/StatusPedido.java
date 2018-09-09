@@ -1,23 +1,29 @@
 package com.tcc.signer.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class StatusPedido implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idStatusPedido;
 	private String descricaoPedido;
-	
-	public StatusPedido() {}
-	
+
+	@OneToMany(mappedBy = "statusPedido")
+	private List<Pedido> pedidos = new ArrayList<>();
+
+	public StatusPedido() {
+	}
 
 	public StatusPedido(Integer idStatusPedido, String descricaoPedido) {
 		super();
@@ -41,6 +47,13 @@ public class StatusPedido implements Serializable {
 		this.descricaoPedido = descricaoPedido;
 	}
 
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
 
 	@Override
 	public int hashCode() {
@@ -49,7 +62,6 @@ public class StatusPedido implements Serializable {
 		result = prime * result + ((idStatusPedido == null) ? 0 : idStatusPedido.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -67,8 +79,5 @@ public class StatusPedido implements Serializable {
 			return false;
 		return true;
 	}
-
-
-
 
 }
