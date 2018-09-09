@@ -48,6 +48,8 @@ public class PessoaJuridica implements Serializable{
 	private Cliente cliente;
 	
 	
+
+	
 	
 	public PessoaJuridica() {}
 

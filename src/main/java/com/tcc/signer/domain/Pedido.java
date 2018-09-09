@@ -8,11 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 
 @Entity
@@ -24,6 +24,12 @@ public class Pedido implements Serializable {
 	private Integer id;
 	private Date instante;
 	
+	@JsonBackReference
+	@ManyToOne
+	@JoinColumn(name="pessoaFisicaId")
+	private PessoaFisica pessoaFisica;
+	
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name="pessoaJuridicaId")
 	private PessoaJuridica pessoaJuridica;
@@ -35,11 +41,12 @@ public class Pedido implements Serializable {
 
 	}
 
-	public Pedido(Integer id, Date instante, PessoaJuridica pessoaJuridica) {
+	public Pedido(Integer id, Date instante, PessoaJuridica pessoaJuridica, PessoaFisica pessoaFisica) {
 		super();
 		this.id = id;
 		this.instante = instante;
 		this.pessoaJuridica = pessoaJuridica;
+		this.pessoaFisica = pessoaFisica;
 	}
 
 	public Integer getId() {
@@ -72,6 +79,14 @@ public class Pedido implements Serializable {
 
 	public void setPessoaJuridica(PessoaJuridica pessoaJuridica) {
 		this.pessoaJuridica = pessoaJuridica;
+	}
+
+	public PessoaFisica getPessoaFisica() {
+		return pessoaFisica;
+	}
+
+	public void setPessoaFisica(PessoaFisica pessoaFisica) {
+		this.pessoaFisica = pessoaFisica;
 	}
 
 	@Override

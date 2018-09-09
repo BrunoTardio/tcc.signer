@@ -37,6 +37,9 @@ public class PessoaFisica implements Serializable {
 	@MapsId
 	Cliente cliente;
 	
+	@OneToMany(mappedBy="pessoaFisica") 
+	private List<Pedido> pedidos = new ArrayList<>();
+	
 	@OneToMany(mappedBy="pessoaFisica")
 	private List<Endereco> enderecos = new ArrayList<>();
 	
@@ -127,6 +130,14 @@ public class PessoaFisica implements Serializable {
 		this.cliente = cliente;
 	}
 	
+
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
 
 	public List<Endereco> getEnderecos() {
 		return enderecos;
