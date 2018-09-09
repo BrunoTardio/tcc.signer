@@ -39,6 +39,9 @@ public class PessoaJuridica implements Serializable{
 	@OneToMany(mappedBy="pessoaJuridica")
 	private List<Pedido> pedidos = new ArrayList<>();
 	
+	@OneToMany(mappedBy="pessoaJuridica")
+	private List<Endereco> enderecos = new ArrayList<>();
+	
 	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name="clienteId")
