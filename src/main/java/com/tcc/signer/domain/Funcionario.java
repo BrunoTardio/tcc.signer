@@ -1,12 +1,15 @@
 package com.tcc.signer.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -23,6 +26,9 @@ public class Funcionario implements Serializable{
 	
 	@OneToOne(cascade=CascadeType.ALL,mappedBy="funcionario")
 	private PessoaFisica pessoafisica;
+	
+	@OneToMany(mappedBy="funcionario")
+	private List<Pedido> pedidos = new ArrayList<>();
 	
 	
 	public Funcionario() {
@@ -56,6 +62,30 @@ public class Funcionario implements Serializable{
 	}
 	
 	
+
+	public PessoaFisica getPessoafisica() {
+		return pessoafisica;
+	}
+
+
+
+	public void setPessoafisica(PessoaFisica pessoafisica) {
+		this.pessoafisica = pessoafisica;
+	}
+
+
+
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+
+
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
+
+
 
 	@Override
 	public int hashCode() {

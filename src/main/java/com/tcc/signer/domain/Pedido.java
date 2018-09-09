@@ -34,6 +34,11 @@ public class Pedido implements Serializable {
 	@JoinColumn(name="pessoaJuridicaId")
 	private PessoaJuridica pessoaJuridica;
 	
+	@JsonBackReference
+	@ManyToOne
+	@JoinColumn(name="funcionarioId")
+	private Funcionario funcionario;
+	
 	@OneToOne(cascade=CascadeType.ALL,mappedBy="pedido")
 	private Pagamento pagamento;
 
@@ -41,12 +46,14 @@ public class Pedido implements Serializable {
 
 	}
 
-	public Pedido(Integer id, Date instante, PessoaJuridica pessoaJuridica, PessoaFisica pessoaFisica) {
+	public Pedido(Integer id, Date instante, PessoaJuridica pessoaJuridica, 
+			PessoaFisica pessoaFisica, Funcionario funcionario) {
 		super();
 		this.id = id;
 		this.instante = instante;
 		this.pessoaJuridica = pessoaJuridica;
 		this.pessoaFisica = pessoaFisica;
+		this.funcionario = funcionario;
 	}
 
 	public Integer getId() {
@@ -87,6 +94,14 @@ public class Pedido implements Serializable {
 
 	public void setPessoaFisica(PessoaFisica pessoaFisica) {
 		this.pessoaFisica = pessoaFisica;
+	}
+
+	public Funcionario getFuncionario() {
+		return funcionario;
+	}
+
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
 	}
 
 	@Override
