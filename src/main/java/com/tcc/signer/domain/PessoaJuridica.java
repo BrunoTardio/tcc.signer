@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import com.tcc.signer.domain.Pedido;
+
 
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
@@ -13,8 +13,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class PessoaJuridica implements Serializable{
@@ -23,7 +26,6 @@ public class PessoaJuridica implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	// id cliente
 	private String nomeEmpresa;
 	private String fantasia;
 	private String cnpj;
@@ -37,12 +39,17 @@ public class PessoaJuridica implements Serializable{
 	@OneToMany(mappedBy="pessoaJuridica")
 	private List<Pedido> pedidos = new ArrayList<>();
 	
+	@JsonBackReference
+	@ManyToOne
+	@JoinColumn(name="clienteId")
+	private Cliente cliente;
+	
 	
 	
 	public PessoaJuridica() {}
 
 	public PessoaJuridica(Integer id, String nomeEmpresa, String fantasia, String cnpj, String inscricaoEstadual,
-			String tributacao) {
+			String tributacao,Cliente cliente) {
 		super();
 		this.id = id;
 		this.nomeEmpresa = nomeEmpresa;
@@ -50,6 +57,7 @@ public class PessoaJuridica implements Serializable{
 		this.cnpj = cnpj;
 		this.inscricaoEstadual = inscricaoEstadual;
 		this.tributacao = tributacao;
+		this.cliente = cliente;
 	}
 
 	public Integer getId() {
@@ -101,6 +109,14 @@ public class PessoaJuridica implements Serializable{
 	}
 	
 	
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
 
 	public Set<String> getTelefones() {
 		return telefones;

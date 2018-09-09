@@ -1,15 +1,19 @@
 package com.tcc.signer.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+
 
 @Entity
 public class Cliente implements Serializable {
@@ -26,7 +30,9 @@ public class Cliente implements Serializable {
 	@OneToOne(cascade=CascadeType.ALL,mappedBy="cliente")
 	private PessoaFisica pessoafisica;
 	
-
+	@OneToMany(mappedBy="cliente")
+	private List<PessoaJuridica> pessoasJuridicas = new ArrayList<>();
+	
 	public Cliente() {
 
 	}
@@ -52,6 +58,22 @@ public class Cliente implements Serializable {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+	
+	public PessoaFisica getPessoafisica() {
+		return pessoafisica;
+	}
+
+	public void setPessoafisica(PessoaFisica pessoafisica) {
+		this.pessoafisica = pessoafisica;
+	}
+
+	public List<PessoaJuridica> getPessoasJuridicas() {
+		return pessoasJuridicas;
+	}
+
+	public void setPessoasJuridicas(List<PessoaJuridica> pessoasJuridicas) {
+		this.pessoasJuridicas = pessoasJuridicas;
 	}
 
 	@Override
