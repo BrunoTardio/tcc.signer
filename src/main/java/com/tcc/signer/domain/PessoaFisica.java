@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -38,6 +39,10 @@ public class PessoaFisica implements Serializable {
 	
 	@OneToMany(mappedBy="pessoaFisica")
 	private List<Endereco> enderecos = new ArrayList<>();
+	
+	@OneToOne(cascade=CascadeType.ALL,mappedBy="pessoaFisica")
+	private PessoaFisicaEleitor eleitor;
+	
 	
 	public PessoaFisica() {
 	}
@@ -118,6 +123,23 @@ public class PessoaFisica implements Serializable {
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
+	}
+	
+
+	public List<Endereco> getEnderecos() {
+		return enderecos;
+	}
+
+	public void setEnderecos(List<Endereco> enderecos) {
+		this.enderecos = enderecos;
+	}
+
+	public PessoaFisicaEleitor getEleitor() {
+		return eleitor;
+	}
+
+	public void setEleitor(PessoaFisicaEleitor eleitor) {
+		this.eleitor = eleitor;
 	}
 
 	@Override

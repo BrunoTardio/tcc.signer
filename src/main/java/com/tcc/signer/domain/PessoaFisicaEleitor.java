@@ -6,13 +6,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
 
 @Entity
 public class PessoaFisicaEleitor implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private String id;
 	private String EleitorNumero;
 	private String EleitorSecao;
@@ -20,17 +22,23 @@ public class PessoaFisicaEleitor implements Serializable{
 	private String EleitorCidade;
 	private String EleitorUF;
 	
+	@OneToOne
+	@JoinColumn(name="pessoaFisicaId")
+	@MapsId
+	PessoaFisica pessoaFisica;
+	
 	public PessoaFisicaEleitor() {}
 
 	public PessoaFisicaEleitor(String id, String eleitorNumero, String eleitorSecao, String eleitorZona,
-			String eleitorCidade, String eleitorUF) {
+			String eleitorCidade, String eleitorUF,PessoaFisica pessoaFisica) {
 		super();
 		this.id = id;
-		EleitorNumero = eleitorNumero;
-		EleitorSecao = eleitorSecao;
-		EleitorZona = eleitorZona;
-		EleitorCidade = eleitorCidade;
-		EleitorUF = eleitorUF;
+		this.EleitorNumero = eleitorNumero;
+		this.EleitorSecao = eleitorSecao;
+		this.EleitorZona = eleitorZona;
+		this.EleitorCidade = eleitorCidade;
+		this.EleitorUF = eleitorUF;
+		this.pessoaFisica = pessoaFisica;
 	}
 
 	public String getId() {
@@ -79,6 +87,14 @@ public class PessoaFisicaEleitor implements Serializable{
 
 	public void setEleitorUF(String eleitorUF) {
 		EleitorUF = eleitorUF;
+	}
+
+	public PessoaFisica getPessoaFisica() {
+		return pessoaFisica;
+	}
+
+	public void setPessoaFisica(PessoaFisica pessoaFisica) {
+		this.pessoaFisica = pessoaFisica;
 	}
 
 	@Override
