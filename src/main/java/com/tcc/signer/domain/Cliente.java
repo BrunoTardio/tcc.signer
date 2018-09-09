@@ -2,6 +2,7 @@ package com.tcc.signer.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,6 +22,9 @@ public class Cliente implements Serializable {
 	@JoinColumn(name="usuarioId")
 	@MapsId
 	private Usuario usuario;
+	
+	@OneToOne(cascade=CascadeType.ALL,mappedBy="cliente")
+	private PessoaFisica pessoafisica;
 	
 
 	public Cliente() {

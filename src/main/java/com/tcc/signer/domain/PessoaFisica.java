@@ -28,10 +28,16 @@ public class PessoaFisica implements Serializable {
 	@MapsId
 	Funcionario funcionario;
 	
+	@OneToOne
+	@JoinColumn(name="clienteId")
+	@MapsId
+	Cliente cliente;
+	
+	
 	public PessoaFisica() {
 	}
 
-	public PessoaFisica(Integer id, String nome, String cpf, Date dataNascimento, String cei, String pis, Funcionario funcionario) {
+	public PessoaFisica(Integer id, String nome, String cpf, Date dataNascimento, String cei, String pis, Funcionario funcionario, Cliente cliente) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -40,6 +46,7 @@ public class PessoaFisica implements Serializable {
 		this.cei = cei;
 		this.pis = pis;
 		this.funcionario = funcionario;
+		this.cliente = cliente;
 	}
 
 	public Integer getId() {
@@ -97,6 +104,15 @@ public class PessoaFisica implements Serializable {
 
 	public void setFuncionario(Funcionario funcionario) {
 		this.funcionario = funcionario;
+	}
+	
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
 	@Override
