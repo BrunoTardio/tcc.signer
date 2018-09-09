@@ -3,9 +3,18 @@ package com.tcc.signer.domain;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+@Entity
 public class PessoaFisicaRg implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@Id
 	private Integer id;
 	private String nomeTitular;
 	private Date dataExpedicao;
@@ -14,11 +23,16 @@ public class PessoaFisicaRg implements Serializable {
 	private String naturalidade;
 	private String orgaoExpeditor; // tabela
 
+	@OneToOne
+	@JoinColumn(name = "pessoaFisicaId")
+	@MapsId
+	PessoaFisica pessoaFisica;
+
 	public PessoaFisicaRg() {
 	}
 
 	public PessoaFisicaRg(Integer id, String nomeTitular, Date dataExpedicao, String nomeDoPai, String nomeDaMae,
-			String naturalidade, String orgaoExpeditor) {
+			String naturalidade, String orgaoExpeditor, PessoaFisica pessoaFisica) {
 		super();
 		this.id = id;
 		this.nomeTitular = nomeTitular;
@@ -27,6 +41,7 @@ public class PessoaFisicaRg implements Serializable {
 		this.nomeDaMae = nomeDaMae;
 		this.naturalidade = naturalidade;
 		this.orgaoExpeditor = orgaoExpeditor;
+		this.pessoaFisica = pessoaFisica;
 	}
 
 	public Integer getId() {
@@ -83,6 +98,14 @@ public class PessoaFisicaRg implements Serializable {
 
 	public void setOrgaoExpeditor(String orgaoExpeditor) {
 		this.orgaoExpeditor = orgaoExpeditor;
+	}
+
+	public PessoaFisica getPessoaFisica() {
+		return pessoaFisica;
+	}
+
+	public void setPessoaFisica(PessoaFisica pessoaFisica) {
+		this.pessoaFisica = pessoaFisica;
 	}
 
 	@Override

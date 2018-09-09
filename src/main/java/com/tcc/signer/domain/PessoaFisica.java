@@ -43,6 +43,8 @@ public class PessoaFisica implements Serializable {
 	@OneToOne(cascade=CascadeType.ALL,mappedBy="pessoaFisica")
 	private PessoaFisicaEleitor eleitor;
 	
+	@OneToOne(cascade=CascadeType.ALL,mappedBy="pessoaFisica")
+	private PessoaFisicaRg rg;
 	
 	public PessoaFisica() {
 	}
@@ -140,6 +142,14 @@ public class PessoaFisica implements Serializable {
 
 	public void setEleitor(PessoaFisicaEleitor eleitor) {
 		this.eleitor = eleitor;
+	}
+
+	public PessoaFisicaRg getRg() {
+		return rg;
+	}
+
+	public void setRg(PessoaFisicaRg rg) {
+		this.rg = rg;
 	}
 
 	@Override
