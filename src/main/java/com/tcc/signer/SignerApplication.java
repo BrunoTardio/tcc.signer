@@ -145,7 +145,7 @@ public class SignerApplication implements CommandLineRunner {
 		
 		SimpleDateFormat stf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		
-		Pedido ped1 = new Pedido(null, stf.parse("30/09/2017 10:32"), null,null,null);
+		Pedido ped1 = new Pedido(null, stf.parse("30/09/2017 10:32"), null,null,null,null);
 		Pagamento pagto1 = new PagamentoComCartao(null,EstadoPagamento.QUITADO, 
 				ped1, 6);
 		ped1.setPagamento(pagto1);

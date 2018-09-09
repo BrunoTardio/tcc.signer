@@ -14,46 +14,51 @@ import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-
 @Entity
 public class Pedido implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private Date instante;
-	
+
 	@JsonBackReference
 	@ManyToOne
-	@JoinColumn(name="pessoaFisicaId")
+	@JoinColumn(name = "pessoaFisicaId")
 	private PessoaFisica pessoaFisica;
-	
+
 	@JsonBackReference
 	@ManyToOne
-	@JoinColumn(name="pessoaJuridicaId")
+	@JoinColumn(name = "pessoaJuridicaId")
 	private PessoaJuridica pessoaJuridica;
-	
+
 	@JsonBackReference
 	@ManyToOne
-	@JoinColumn(name="funcionarioId")
+	@JoinColumn(name = "funcionarioId")
 	private Funcionario funcionario;
-	
-	@OneToOne(cascade=CascadeType.ALL,mappedBy="pedido")
+
+	@JsonBackReference
+	@ManyToOne
+	@JoinColumn(name = "produtoId")
+	private Produto produto;
+
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")
 	private Pagamento pagamento;
 
 	public Pedido() {
 
 	}
 
-	public Pedido(Integer id, Date instante, PessoaJuridica pessoaJuridica, 
-			PessoaFisica pessoaFisica, Funcionario funcionario) {
+	public Pedido(Integer id, Date instante, PessoaJuridica pessoaJuridica, PessoaFisica pessoaFisica,
+			Funcionario funcionario, Produto produto) {
 		super();
 		this.id = id;
 		this.instante = instante;
 		this.pessoaJuridica = pessoaJuridica;
 		this.pessoaFisica = pessoaFisica;
 		this.funcionario = funcionario;
+		this.produto = produto;
 	}
 
 	public Integer getId() {
@@ -102,6 +107,14 @@ public class Pedido implements Serializable {
 
 	public void setFuncionario(Funcionario funcionario) {
 		this.funcionario = funcionario;
+	}
+
+	public Produto getProduto() {
+		return produto;
+	}
+
+	public void setProduto(Produto produto) {
+		this.produto = produto;
 	}
 
 	@Override

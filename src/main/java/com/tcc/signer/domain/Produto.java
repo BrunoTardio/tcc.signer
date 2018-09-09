@@ -1,6 +1,8 @@
 package com.tcc.signer.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -9,12 +11,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.tcc.signer.domain.enums.TipoProduto;
-
-
 
 @Entity
 public class Produto implements Serializable {
@@ -26,31 +27,34 @@ public class Produto implements Serializable {
 	private String nome;
 	private Double preco;
 	private Integer tipo;
-	
+
 	@JsonBackReference
 	@ManyToOne
-	@JoinColumn(name="produtoDescricao_id")
+	@JoinColumn(name = "produtoDescricao_id")
 	private ProdutoDescricao produtoDescricao;// atributo mapeado
-	
+
 	@JsonBackReference
 	@ManyToOne
-	@JoinColumn(name="produtoTipoId")
+	@JoinColumn(name = "produtoTipoId")
 	private ProdutoTipo produtoTipo;
-	
+
 	@JsonBackReference
 	@ManyToOne
-	@JoinColumn(name="produtoValidadeId")
+	@JoinColumn(name = "produtoValidadeId")
 	private ProdutoValidade produtoValidade;
-	
-	@OneToOne(cascade=CascadeType.ALL,mappedBy="produto")
+
+	@OneToMany(mappedBy = "produto")
+	private List<Pedido> pedidos = new ArrayList<>();
+
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "produto")
 	private ProdutoDetalhe produtoDetalhe;
 
 	public Produto() {
 
 	}
 
-	public Produto(Integer id, String nome, Double preco, ProdutoDescricao produtoDescricao,
-			ProdutoTipo produtoTipo,ProdutoValidade produtoValidade, TipoProduto tipo) {
+	public Produto(Integer id, String nome, Double preco, ProdutoDescricao produtoDescricao, ProdutoTipo produtoTipo,
+			ProdutoValidade produtoValidade, TipoProduto tipo) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -100,8 +104,6 @@ public class Produto implements Serializable {
 	public void setProdutoTipo(ProdutoTipo produtoTipo) {
 		this.produtoTipo = produtoTipo;
 	}
-	
-	
 
 	public ProdutoValidade getProdutoValidade() {
 		return produtoValidade;
@@ -111,8 +113,14 @@ public class Produto implements Serializable {
 		this.produtoValidade = produtoValidade;
 	}
 
-	
-	
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
+
 	public ProdutoDetalhe getProdutoDetalhe() {
 		return produtoDetalhe;
 	}
