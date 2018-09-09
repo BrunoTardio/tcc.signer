@@ -34,6 +34,9 @@ public class Usuario implements Serializable {
 	
 	@OneToOne(cascade=CascadeType.ALL,mappedBy="usuario")
 	private Cliente cliente;
+	
+	@OneToOne(cascade=CascadeType.ALL,mappedBy="usuario")
+	private Funcionario funcionario;
 
 	public Usuario() {
 	}
