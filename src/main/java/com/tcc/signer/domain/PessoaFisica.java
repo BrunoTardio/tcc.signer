@@ -1,12 +1,15 @@
 package com.tcc.signer.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -33,6 +36,8 @@ public class PessoaFisica implements Serializable {
 	@MapsId
 	Cliente cliente;
 	
+	@OneToMany(mappedBy="pessoaFisica")
+	private List<Endereco> enderecos = new ArrayList<>();
 	
 	public PessoaFisica() {
 	}

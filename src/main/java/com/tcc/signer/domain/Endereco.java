@@ -29,12 +29,17 @@ public class Endereco implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "pessoaJuridicaId")
 	PessoaJuridica pessoaJuridica;
+	
+	@JsonBackReference
+	@ManyToOne
+	@JoinColumn(name = "pessoaFisicaId")
+	PessoaFisica  pessoaFisica;
 
 	public Endereco() {
 	}
 
 	public Endereco(Integer id, String logradouro, String uf, String referencia, String numero, String cidade,
-			PessoaJuridica pessoaJuridica) {
+			PessoaJuridica pessoaJuridica, PessoaFisica pessoaFisica) {
 		super();
 		this.id = id;
 		this.logradouro = logradouro;
@@ -43,6 +48,7 @@ public class Endereco implements Serializable {
 		this.numero = numero;
 		this.cidade = cidade;
 		this.pessoaJuridica = pessoaJuridica;
+		this.pessoaFisica = pessoaFisica;
 	}
 
 	public Integer getId() {
@@ -99,6 +105,14 @@ public class Endereco implements Serializable {
 
 	public void setPessoaJuridica(PessoaJuridica pessoaJuridica) {
 		this.pessoaJuridica = pessoaJuridica;
+	}
+
+	public PessoaFisica getPessoaFisica() {
+		return pessoaFisica;
+	}
+
+	public void setPessoaFisica(PessoaFisica pessoaFisica) {
+		this.pessoaFisica = pessoaFisica;
 	}
 
 	@Override
