@@ -2,7 +2,9 @@ package com.tcc.signer.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -42,12 +44,15 @@ public class Produto implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "produtoValidadeId")
 	private ProdutoValidade produtoValidade;
-
-	@OneToMany(mappedBy = "produto")
-	private List<Pedido> pedidos = new ArrayList<>();
-
+	
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "produto")
 	private ProdutoDetalhe produtoDetalhe;
+
+	/*@OneToMany(mappedBy = "produto")
+	private List<Pedido> pedidos = new ArrayList<>();*/
+	
+	@OneToMany(mappedBy="id.produto")
+	private Set<ItemPedido> itens = new HashSet<>();
 
 	public Produto() {
 
@@ -64,6 +69,16 @@ public class Produto implements Serializable {
 		this.produtoValidade = produtoValidade;
 		this.tipo = tipo.getCod();// ENUM
 	}
+	
+	public List<Pedido> getPedidos(){
+		List<Pedido> lista = new ArrayList<>();
+		for(ItemPedido x : itens) {
+			lista.add(x.getPedido());
+		}
+		return lista;
+	}
+	
+	
 
 	public Integer getId() {
 		return id;
@@ -113,14 +128,7 @@ public class Produto implements Serializable {
 		this.produtoValidade = produtoValidade;
 	}
 
-	public List<Pedido> getPedidos() {
-		return pedidos;
-	}
-
-	public void setPedidos(List<Pedido> pedidos) {
-		this.pedidos = pedidos;
-	}
-
+	
 	public ProdutoDetalhe getProdutoDetalhe() {
 		return produtoDetalhe;
 	}
@@ -132,6 +140,14 @@ public class Produto implements Serializable {
 	public void setTipo(Integer tipo) {
 		this.tipo = tipo;
 	}
+	
+	public Set<ItemPedido> getItens() {
+		return itens;
+	}
+
+	public void setItens(Set<ItemPedido> itens) {
+		this.itens = itens;
+	}
 
 	// ENUM
 	public TipoProduto getTipo() {
@@ -141,6 +157,8 @@ public class Produto implements Serializable {
 	public void setTipo(TipoProduto tipo) {
 		this.tipo = tipo.getCod();
 	}
+	
+	
 
 	@Override
 	public int hashCode() {
@@ -166,5 +184,7 @@ public class Produto implements Serializable {
 			return false;
 		return true;
 	}
+
+
 
 }

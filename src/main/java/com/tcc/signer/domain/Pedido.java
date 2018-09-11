@@ -2,6 +2,8 @@ package com.tcc.signer.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -37,36 +40,43 @@ public class Pedido implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "funcionarioId")
 	private Funcionario funcionario;
-
-	@JsonBackReference
-	@ManyToOne
-	@JoinColumn(name = "produtoId")
-	private Produto produto;
-
+	
 	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "statusPedidoId")
 	private StatusPedido statusPedido;
+
+	/*@JsonBackReference
+	@ManyToOne
+	@JoinColumn(name = "produtoId")
+	private Produto produto;*/
+	
+	@OneToMany(mappedBy="id.pedido")
+	private Set<ItemPedido> itens = new HashSet<>();
+	
 
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")
 	private Pagamento pagamento;
 
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")
 	private Agenda agenda;
+	
+	
+	
 
 	public Pedido() {
 
 	}
 
 	public Pedido(Integer id, Date instante, PessoaJuridica pessoaJuridica, PessoaFisica pessoaFisica,
-			Funcionario funcionario, Produto produto, StatusPedido statusPedido) {
+			Funcionario funcionario,  StatusPedido statusPedido) {
 		super();
 		this.id = id;
 		this.instante = instante;
 		this.pessoaJuridica = pessoaJuridica;
 		this.pessoaFisica = pessoaFisica;
 		this.funcionario = funcionario;
-		this.produto = produto;
+		
 		this.statusPedido = statusPedido;
 	}
 
@@ -118,13 +128,7 @@ public class Pedido implements Serializable {
 		this.funcionario = funcionario;
 	}
 
-	public Produto getProduto() {
-		return produto;
-	}
-
-	public void setProduto(Produto produto) {
-		this.produto = produto;
-	}
+	
 
 	public StatusPedido getStatusPedido() {
 		return statusPedido;
@@ -134,20 +138,25 @@ public class Pedido implements Serializable {
 		this.statusPedido = statusPedido;
 	}
 
-	/**
-	 * @return the agenda
-	 */
+
 	public Agenda getAgenda() {
 		return agenda;
 	}
 
-	/**
-	 * @param agenda the agenda to set
-	 */
 	public void setAgenda(Agenda agenda) {
 		this.agenda = agenda;
 	}
+	
+	public Set<ItemPedido> getItens() {
+		return itens;
+	}
 
+	public void setItens(Set<ItemPedido> itens) {
+		this.itens = itens;
+	}
+
+	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -172,5 +181,6 @@ public class Pedido implements Serializable {
 			return false;
 		return true;
 	}
+
 
 }

@@ -12,6 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.tcc.signer.domain.AlocacaoFuncionario;
+import com.tcc.signer.domain.ItemPedido;
 import com.tcc.signer.domain.Pagamento;
 import com.tcc.signer.domain.PagamentoComCartao;
 import com.tcc.signer.domain.Pedido;
@@ -29,6 +30,7 @@ import com.tcc.signer.domain.UsuarioEmail;
 import com.tcc.signer.domain.enums.EstadoPagamento;
 import com.tcc.signer.domain.enums.TipoProduto;
 import com.tcc.signer.repositories.AlocacaoFuncionarioRepository;
+import com.tcc.signer.repositories.ItemPedidoRepository;
 import com.tcc.signer.repositories.PagamentoRepository;
 import com.tcc.signer.repositories.PedidoRepository;
 import com.tcc.signer.repositories.ProdutoDescricaoRepository;
@@ -72,6 +74,8 @@ public class SignerApplication implements CommandLineRunner {
 	private PedidoRepository pedidoRepo;
 	@Autowired
 	private PagamentoRepository pagamentoRepo;
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepo;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(SignerApplication.class, args);
@@ -145,14 +149,22 @@ public class SignerApplication implements CommandLineRunner {
 		
 		SimpleDateFormat stf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		
-		Pedido ped1 = new Pedido(null, stf.parse("30/09/2017 10:32"), null,null,null,null,null);
+		Pedido ped1 = new Pedido(null, stf.parse("30/09/2017 10:32"), null,null,null,null);
 		Pagamento pagto1 = new PagamentoComCartao(null,EstadoPagamento.QUITADO, 
 				ped1, 6);
 		ped1.setPagamento(pagto1);
 		// associar pessoa ao pedido depois
+		// Items de pedido 
 		
 		pedidoRepo.saveAll(Arrays.asList(ped1));
 		pagamentoRepo.saveAll(Arrays.asList(pagto1));
 		
+		ItemPedido ip1 = new ItemPedido(ped1,p1,0.00,1,2000.0);
+		ItemPedido ip2 = new ItemPedido(ped1,p3,0.00,2,80.0);
+		ped1.getItens().addAll(Arrays.asList(ip1,ip2));
+		
+		p1.getItens().addAll(Arrays.asList(ip1));
+		p2.getItens().addAll(Arrays.asList(ip1));
+		itemPedidoRepo.saveAll(Arrays.asList(ip1,ip2));
 	}
 }
