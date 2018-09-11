@@ -18,6 +18,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class PessoaJuridica implements Serializable{
@@ -36,13 +37,15 @@ public class PessoaJuridica implements Serializable{
 	@CollectionTable(name="TelefoneJuridica")
 	private Set<String> telefones = new HashSet<>();
 	
+	@JsonBackReference
 	@OneToMany(mappedBy="pessoaJuridica")
 	private List<Pedido> pedidos = new ArrayList<>();
 	
+	@JsonBackReference
 	@OneToMany(mappedBy="pessoaJuridica")
 	private List<Endereco> enderecos = new ArrayList<>();
 	
-	@JsonBackReference
+	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name="clienteId")
 	private Cliente cliente;

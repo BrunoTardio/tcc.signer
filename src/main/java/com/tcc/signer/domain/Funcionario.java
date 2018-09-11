@@ -12,6 +12,8 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class Funcionario implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -19,14 +21,17 @@ public class Funcionario implements Serializable{
 	@Id
 	private Integer id;
 	
+	
 	@OneToOne
 	@JoinColumn(name="usuarioId")
 	@MapsId
 	private Usuario usuario;
 	
+	@JsonBackReference
 	@OneToOne(cascade=CascadeType.ALL,mappedBy="funcionario")
 	private PessoaFisica pessoafisica;
 	
+	@JsonBackReference
 	@OneToMany(mappedBy="funcionario")
 	private List<Pedido> pedidos = new ArrayList<>();
 	

@@ -17,6 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tcc.signer.domain.enums.TipoProduto;
 
 @Entity
@@ -50,7 +51,7 @@ public class Produto implements Serializable {
 
 	/*@OneToMany(mappedBy = "produto")
 	private List<Pedido> pedidos = new ArrayList<>();*/
-	
+	@JsonIgnore
 	@OneToMany(mappedBy="id.produto")
 	private Set<ItemPedido> itens = new HashSet<>();
 
@@ -70,6 +71,7 @@ public class Produto implements Serializable {
 		this.tipo = tipo.getCod();// ENUM
 	}
 	
+	@JsonIgnore
 	public List<Pedido> getPedidos(){
 		List<Pedido> lista = new ArrayList<>();
 		for(ItemPedido x : itens) {

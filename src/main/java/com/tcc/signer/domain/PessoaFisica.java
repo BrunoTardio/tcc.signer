@@ -13,6 +13,8 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class PessoaFisica implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -37,9 +39,11 @@ public class PessoaFisica implements Serializable {
 	@MapsId
 	Cliente cliente;
 	
+	@JsonBackReference
 	@OneToMany(mappedBy="pessoaFisica") 
 	private List<Pedido> pedidos = new ArrayList<>();
 	
+	@JsonBackReference
 	@OneToMany(mappedBy="pessoaFisica")
 	private List<Endereco> enderecos = new ArrayList<>();
 	
