@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 public class ProdutoDescricao implements Serializable {
@@ -17,37 +19,37 @@ public class ProdutoDescricao implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer idProdutoDescricacao;
+	private Integer id;
 
-	private String descricacao;
+	private String descricao;
 	
-	
-	@OneToMany(mappedBy="produtoDescricao")// atributo que esta sendo mapeado
+	@JsonIgnore
+	@OneToMany(mappedBy="produtoDescricao")
 	private List<Produto> produtos = new ArrayList<>();
-
+	
 	public ProdutoDescricao() {
 	}
 
-	public ProdutoDescricao(Integer idProdutoDescricacao, String descricacao) {
+	public ProdutoDescricao(Integer id, String descricao) {
 		super();
-		this.idProdutoDescricacao = idProdutoDescricacao;
-		this.descricacao = descricacao;
+		this.id = id;
+		this.descricao = descricao;
 	}
 
-	public Integer getIdProdutoDescricacao() {
-		return idProdutoDescricacao;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setIdProdutoDescricacao(Integer idProdutoDescricacao) {
-		this.idProdutoDescricacao = idProdutoDescricacao;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
-	public String getDescricacao() {
-		return descricacao;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setDescricacao(String descricacao) {
-		this.descricacao = descricacao;
+	public void setDescricacao(String descricao) {
+		this.descricao = descricao;
 	}
 
 	public List<Produto> getProdutos() {
@@ -62,7 +64,7 @@ public class ProdutoDescricao implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((idProdutoDescricacao == null) ? 0 : idProdutoDescricacao.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -75,10 +77,10 @@ public class ProdutoDescricao implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		ProdutoDescricao other = (ProdutoDescricao) obj;
-		if (idProdutoDescricacao == null) {
-			if (other.idProdutoDescricacao != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!idProdutoDescricacao.equals(other.idProdutoDescricacao))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}

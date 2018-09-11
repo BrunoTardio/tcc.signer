@@ -13,14 +13,18 @@ import com.tcc.signer.services.exceptions.ObjectNotFoundException;
 public class ProdutoDescricaoService {
 
 	@Autowired
-	private ProdutoDescricaoRepository produtoDescricaoRepo;
+	private ProdutoDescricaoRepository repo;
 
 	public ProdutoDescricao buscar(Integer id) {
-		Optional<ProdutoDescricao> obj = produtoDescricaoRepo.findById(id);
+		Optional<ProdutoDescricao> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException( 
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + ProdutoDescricao.class.getName())); 
 	}
 	
+	public ProdutoDescricao insert(ProdutoDescricao obj) {
+		obj.setId(null);
+		return repo.save(obj);
+	}
 	
 
 }
