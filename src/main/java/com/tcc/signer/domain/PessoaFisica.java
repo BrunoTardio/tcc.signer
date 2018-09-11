@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class PessoaFisica implements Serializable {
@@ -39,11 +40,11 @@ public class PessoaFisica implements Serializable {
 	@MapsId
 	Cliente cliente;
 	
-	@JsonBackReference
+	@JsonIgnore
 	@OneToMany(mappedBy="pessoaFisica") 
 	private List<Pedido> pedidos = new ArrayList<>();
 	
-	@JsonBackReference
+	@JsonIgnore
 	@OneToMany(mappedBy="pessoaFisica")
 	private List<Endereco> enderecos = new ArrayList<>();
 	

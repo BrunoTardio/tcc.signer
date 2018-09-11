@@ -24,11 +24,11 @@ public class Usuario implements Serializable {
 	private String login;
 	private String senha;
 
-	@JsonManagedReference
+	
 	@OneToMany(mappedBy = "usuario")
 	private List<Telefone> telefones = new ArrayList<>();
 	
-	@JsonManagedReference
+	
 	@OneToMany(mappedBy = "usuario")
 	private List<UsuarioEmail> usuarioEmails = new ArrayList<>();
 	

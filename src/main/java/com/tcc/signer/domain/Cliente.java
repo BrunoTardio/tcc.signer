@@ -6,14 +6,13 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Cliente implements Serializable {
@@ -22,17 +21,19 @@ public class Cliente implements Serializable {
 	@Id
 	private Integer id;
 	
+	
 	@OneToOne
-	@JoinColumn(name="usuarioId")
+	@JoinColumn(name = "usuarioId")
 	@MapsId
 	private Usuario usuario;
-	
-	@OneToOne(cascade=CascadeType.ALL,mappedBy="cliente")
+
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "cliente")
 	private PessoaFisica pessoafisica;
-	
-	@OneToMany(mappedBy="cliente")
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "cliente")
 	private List<PessoaJuridica> pessoasJuridicas = new ArrayList<>();
-	
+
 	public Cliente() {
 
 	}
@@ -50,8 +51,7 @@ public class Cliente implements Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
-	
+
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -59,7 +59,7 @@ public class Cliente implements Serializable {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	
+
 	public PessoaFisica getPessoafisica() {
 		return pessoafisica;
 	}

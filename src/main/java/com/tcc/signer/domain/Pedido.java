@@ -15,9 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Pedido implements Serializable {
@@ -26,61 +24,56 @@ public class Pedido implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
-	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
+
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date instante;
 
-	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "pessoaFisicaId")
 	private PessoaFisica pessoaFisica;
 
-	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "pessoaJuridicaId")
 	private PessoaJuridica pessoaJuridica;
 
-	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "funcionarioId")
 	private Funcionario funcionario;
-	
-	@JsonManagedReference
+
 	@ManyToOne
 	@JoinColumn(name = "statusPedidoId")
 	private StatusPedido statusPedido;
 
-	/*@JsonBackReference
-	@ManyToOne
-	@JoinColumn(name = "produtoId")
-	private Produto produto;*/
-	
-	@OneToMany(mappedBy="id.pedido")
+	/*
+	 * @JsonBackReference
+	 * 
+	 * @ManyToOne
+	 * 
+	 * @JoinColumn(name = "produtoId") private Produto produto;
+	 */
+
+	@OneToMany(mappedBy = "id.pedido")
 	private Set<ItemPedido> itens = new HashSet<>();
-	
-	@JsonManagedReference
+
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")
 	private Pagamento pagamento;
 
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")
 	private Agenda agenda;
-	
-	
-	
 
 	public Pedido() {
 
 	}
 
 	public Pedido(Integer id, Date instante, PessoaJuridica pessoaJuridica, PessoaFisica pessoaFisica,
-			Funcionario funcionario,  StatusPedido statusPedido) {
+			Funcionario funcionario, StatusPedido statusPedido) {
 		super();
 		this.id = id;
 		this.instante = instante;
 		this.pessoaJuridica = pessoaJuridica;
 		this.pessoaFisica = pessoaFisica;
 		this.funcionario = funcionario;
-		
+
 		this.statusPedido = statusPedido;
 	}
 
@@ -132,8 +125,6 @@ public class Pedido implements Serializable {
 		this.funcionario = funcionario;
 	}
 
-	
-
 	public StatusPedido getStatusPedido() {
 		return statusPedido;
 	}
@@ -142,7 +133,6 @@ public class Pedido implements Serializable {
 		this.statusPedido = statusPedido;
 	}
 
-
 	public Agenda getAgenda() {
 		return agenda;
 	}
@@ -150,7 +140,7 @@ public class Pedido implements Serializable {
 	public void setAgenda(Agenda agenda) {
 		this.agenda = agenda;
 	}
-	
+
 	public Set<ItemPedido> getItens() {
 		return itens;
 	}
@@ -159,8 +149,6 @@ public class Pedido implements Serializable {
 		this.itens = itens;
 	}
 
-	
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -185,6 +173,5 @@ public class Pedido implements Serializable {
 			return false;
 		return true;
 	}
-
 
 }

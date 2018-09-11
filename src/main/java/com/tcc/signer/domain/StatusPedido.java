@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class StatusPedido implements Serializable {
@@ -21,7 +22,7 @@ public class StatusPedido implements Serializable {
 	private Integer idStatusPedido;
 	private String descricaoPedido;
 
-	@JsonBackReference
+	@JsonIgnore
 	@OneToMany(mappedBy = "statusPedido")
 	private List<Pedido> pedidos = new ArrayList<>();
 

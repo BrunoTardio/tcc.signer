@@ -16,7 +16,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tcc.signer.domain.enums.TipoProduto;
 
@@ -31,28 +30,30 @@ public class Produto implements Serializable {
 	private Double preco;
 	private Integer tipo;
 
-	@JsonBackReference
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "produtoDescricao_id")
 	private ProdutoDescricao produtoDescricao;// atributo mapeado
 
-	@JsonBackReference
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "produtoTipoId")
 	private ProdutoTipo produtoTipo;
 
-	@JsonBackReference
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "produtoValidadeId")
 	private ProdutoValidade produtoValidade;
-	
+
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "produto")
 	private ProdutoDetalhe produtoDetalhe;
 
-	/*@OneToMany(mappedBy = "produto")
-	private List<Pedido> pedidos = new ArrayList<>();*/
+	/*
+	 * @OneToMany(mappedBy = "produto") private List<Pedido> pedidos = new
+	 * ArrayList<>();
+	 */
 	@JsonIgnore
-	@OneToMany(mappedBy="id.produto")
+	@OneToMany(mappedBy = "id.produto")
 	private Set<ItemPedido> itens = new HashSet<>();
 
 	public Produto() {
@@ -70,17 +71,15 @@ public class Produto implements Serializable {
 		this.produtoValidade = produtoValidade;
 		this.tipo = tipo.getCod();// ENUM
 	}
-	
+
 	@JsonIgnore
-	public List<Pedido> getPedidos(){
+	public List<Pedido> getPedidos() {
 		List<Pedido> lista = new ArrayList<>();
-		for(ItemPedido x : itens) {
+		for (ItemPedido x : itens) {
 			lista.add(x.getPedido());
 		}
 		return lista;
 	}
-	
-	
 
 	public Integer getId() {
 		return id;
@@ -130,7 +129,6 @@ public class Produto implements Serializable {
 		this.produtoValidade = produtoValidade;
 	}
 
-	
 	public ProdutoDetalhe getProdutoDetalhe() {
 		return produtoDetalhe;
 	}
@@ -142,7 +140,7 @@ public class Produto implements Serializable {
 	public void setTipo(Integer tipo) {
 		this.tipo = tipo;
 	}
-	
+
 	public Set<ItemPedido> getItens() {
 		return itens;
 	}
@@ -159,8 +157,6 @@ public class Produto implements Serializable {
 	public void setTipo(TipoProduto tipo) {
 		this.tipo = tipo.getCod();
 	}
-	
-	
 
 	@Override
 	public int hashCode() {
@@ -186,7 +182,5 @@ public class Produto implements Serializable {
 			return false;
 		return true;
 	}
-
-
 
 }

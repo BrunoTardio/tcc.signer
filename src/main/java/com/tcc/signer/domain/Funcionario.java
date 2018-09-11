@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Funcionario implements Serializable{
@@ -27,11 +28,11 @@ public class Funcionario implements Serializable{
 	@MapsId
 	private Usuario usuario;
 	
-	@JsonBackReference
+	@JsonIgnore
 	@OneToOne(cascade=CascadeType.ALL,mappedBy="funcionario")
 	private PessoaFisica pessoafisica;
 	
-	@JsonBackReference
+	@JsonIgnore
 	@OneToMany(mappedBy="funcionario")
 	private List<Pedido> pedidos = new ArrayList<>();
 	

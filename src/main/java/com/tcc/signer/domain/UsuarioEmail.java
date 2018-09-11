@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class UsuarioEmail implements Serializable{
@@ -21,7 +22,7 @@ public class UsuarioEmail implements Serializable{
 	private String email;
 	private String descricao;
 	
-	@JsonBackReference
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="usuarioId")
 	private Usuario usuario;

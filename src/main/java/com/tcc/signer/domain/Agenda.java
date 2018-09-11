@@ -8,23 +8,26 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 public class Agenda implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
-	
+
 	@Id
 	private Integer id;
-	
+
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date data;
-	
+
 	@OneToOne
-	@JoinColumn(name="pedidoId")
+	@JoinColumn(name = "pedidoId")
 	@MapsId
 	private Pedido pedido;
-	
-	public Agenda () {
-		
+
+	public Agenda() {
+
 	}
 
 	public Agenda(Integer id, Date data, Pedido pedido) {
@@ -76,7 +79,9 @@ public class Agenda implements Serializable {
 		this.pedido = pedido;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -87,7 +92,9 @@ public class Agenda implements Serializable {
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -106,7 +113,5 @@ public class Agenda implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
 
 }

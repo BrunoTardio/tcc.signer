@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class PessoaFisicaEleitor implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -22,6 +24,7 @@ public class PessoaFisicaEleitor implements Serializable{
 	private String EleitorCidade;
 	private String EleitorUF;
 	
+	@JsonIgnore
 	@OneToOne
 	@JoinColumn(name="pessoaFisicaId")
 	@MapsId
