@@ -6,6 +6,7 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -38,7 +39,8 @@ public class ProdutoDescricaoResource {
 	
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> insert(@RequestBody ProdutoDescricao obj){	
+	public ResponseEntity<Void> insert(@Valid @RequestBody ProdutoDescricaoDTO objDto){	
+		ProdutoDescricao obj = service.fromDTO(objDto);
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(obj.getId()).toUri();  
@@ -46,7 +48,8 @@ public class ProdutoDescricaoResource {
 	}
 	
 	@RequestMapping(value="/{id}",method=RequestMethod.PUT)
-	public ResponseEntity<Void> update(@RequestBody ProdutoDescricao obj,@PathVariable Integer id){
+	public ResponseEntity<Void> update(@Valid @RequestBody ProdutoDescricaoDTO objDto,@PathVariable Integer id){
+		ProdutoDescricao obj = service.fromDTO(objDto);
 		obj.setId(id);
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();

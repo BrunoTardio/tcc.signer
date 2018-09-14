@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.tcc.signer.domain.ProdutoDescricao;
+import com.tcc.signer.dto.ProdutoDescricaoDTO;
 import com.tcc.signer.repositories.ProdutoDescricaoRepository;
 import com.tcc.signer.services.exceptions.DataIntegrityException;
 import com.tcc.signer.services.exceptions.ObjectNotFoundException;
@@ -57,5 +58,8 @@ public class ProdutoDescricaoService {
 
 	}
 	
+	public ProdutoDescricao fromDTO(ProdutoDescricaoDTO objDto) {
+		return new ProdutoDescricao(objDto.getId(),objDto.getDescricao());
+	}
 	
 }
