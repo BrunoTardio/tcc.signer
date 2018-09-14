@@ -19,11 +19,11 @@ import com.tcc.signer.services.UsuarioService;
 public class UsuarioResource {
 
 	@Autowired
-	private UsuarioService usuarioService;
+	private UsuarioService service;
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) {
-		Usuario obj = usuarioService.buscar(id);
+	public ResponseEntity<Usuario> find(@PathVariable Integer id) {
+		Usuario obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 
 	}

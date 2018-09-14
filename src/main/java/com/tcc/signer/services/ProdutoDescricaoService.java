@@ -15,7 +15,7 @@ public class ProdutoDescricaoService {
 	@Autowired
 	private ProdutoDescricaoRepository repo;
 
-	public ProdutoDescricao buscar(Integer id) {
+	public ProdutoDescricao find(Integer id) {
 		Optional<ProdutoDescricao> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException( 
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + ProdutoDescricao.class.getName())); 
@@ -23,6 +23,11 @@ public class ProdutoDescricaoService {
 	
 	public ProdutoDescricao insert(ProdutoDescricao obj) {
 		obj.setId(null);
+		return repo.save(obj);
+	}
+	
+	public ProdutoDescricao update(ProdutoDescricao obj) {
+		find(obj.getId());
 		return repo.save(obj);
 	}
 	

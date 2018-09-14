@@ -10,16 +10,17 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tcc.signer.domain.StatusPedido;
 import com.tcc.signer.services.StatusPedidoService;
 
+
 @RestController
 @RequestMapping(value = "/statuspedidos")
 public class StatusPedidoResource {
 
 	@Autowired
-	private StatusPedidoService statusPedidoService;
+	private StatusPedidoService service;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) {
-		StatusPedido obj = statusPedidoService.buscar(id);
+	public ResponseEntity<StatusPedido> find(@PathVariable Integer id) {
+		StatusPedido obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 
 	}

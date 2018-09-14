@@ -25,8 +25,8 @@ public class ProdutoDescricaoResource {
 	private ProdutoDescricaoService service;
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) {
-		ProdutoDescricao obj = service.buscar(id);
+	public ResponseEntity<ProdutoDescricao> find(@PathVariable Integer id) {
+		ProdutoDescricao obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
 	
@@ -38,4 +38,15 @@ public class ProdutoDescricaoResource {
 				.path("/{id}").buildAndExpand(obj.getId()).toUri();  
 		return ResponseEntity.created(uri).build();
 	}
+	
+	@RequestMapping(value="/{id}",method=RequestMethod.PUT)
+	public ResponseEntity<Void> update(@RequestBody ProdutoDescricao obj,@PathVariable Integer id){
+		obj.setId(id);
+		obj = service.update(obj);
+		return ResponseEntity.noContent().build();
+	}
+	
+	
+	
+	
 }

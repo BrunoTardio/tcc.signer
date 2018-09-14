@@ -14,7 +14,7 @@ public class StatusPedidoService {
 	@Autowired
 	private StatusPedidoRepository repo;
 
-	public StatusPedido buscar(Integer id) {
+	public StatusPedido find(Integer id) {
 		Optional<StatusPedido> obj = repo.findById(id);
 		return obj.orElse(null);
 	}
