@@ -1,6 +1,9 @@
 package com.tcc.signer.resources;
 
 import java.net.URI;
+import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 
@@ -15,6 +18,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.tcc.signer.domain.ProdutoDescricao;
+import com.tcc.signer.dto.ProdutoDescricaoDTO;
 import com.tcc.signer.services.ProdutoDescricaoService;
 
 @RestController
@@ -51,6 +55,22 @@ public class ProdutoDescricaoResource {
 		service.delete(id);
 	return ResponseEntity.noContent().build();
 	}
+	
+	
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity<List<ProdutoDescricaoDTO>> findAll() {
+		List<ProdutoDescricao> list = service.findAll();
+		List<ProdutoDescricaoDTO> listDto = 
+				list.stream().map(obj -> new ProdutoDescricaoDTO(obj))
+				.collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDto);
+	}
+	
+	
+	
+	
+	
 	
 	
 }

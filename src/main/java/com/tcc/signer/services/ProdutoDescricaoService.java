@@ -1,5 +1,6 @@
 package com.tcc.signer.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,10 @@ public class ProdutoDescricaoService {
 		} catch (DataIntegrityViolationException e) {
 			throw new DataIntegrityException("Existe Produtos atrelados a este Produto Descricao");
 		}
+	}
+	
+	public List<ProdutoDescricao> findAll(){
+		return repo.findAll();
 	}
 
 }
