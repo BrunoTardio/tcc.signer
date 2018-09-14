@@ -73,9 +73,17 @@ public class SignerApplication implements CommandLineRunner {
 
 		ProdutoDescricao pd1 = new ProdutoDescricao(null, "Midia Fisica");
 		ProdutoDescricao pd2 = new ProdutoDescricao(null, "Midia Digital");
+		ProdutoDescricao pd3 = new ProdutoDescricao(null, "Cama mesa banho");
+		ProdutoDescricao pd4 = new ProdutoDescricao(null, "mortal");
+		ProdutoDescricao pd5 = new ProdutoDescricao(null, "testando cat");
+		ProdutoDescricao pd6 = new ProdutoDescricao(null, "Midia Butra");
+		ProdutoDescricao pd7 = new ProdutoDescricao(null, "Gustaviz chur");
+		ProdutoDescricao pd8 = new ProdutoDescricao(null, "emorroids");
+		
 
-		produtoDescricaoRepo.save(pd1);
-		produtoDescricaoRepo.save(pd2);
+		produtoDescricaoRepo.saveAll(Arrays.asList(pd1,pd2,
+				pd3,pd4,pd5,pd6,pd7,pd8));
+		
 
 		statusPedidoRepository.save(sp1);
 		statusPedidoRepository.save(sp2);
