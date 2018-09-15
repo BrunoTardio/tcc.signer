@@ -69,7 +69,7 @@ public class Produto implements Serializable {
 		this.produtoDescricao = produtoDescricao;
 		this.produtoTipo = produtoTipo;
 		this.produtoValidade = produtoValidade;
-		this.tipo = tipo.getCod();// ENUM
+		this.tipo = (tipo == null ) ? null : tipo.getCod();// ENUM
 	}
 
 	@JsonIgnore

@@ -34,9 +34,12 @@ public class ProdutoDescricaoService {
 	}
 
 	public ProdutoDescricao update(ProdutoDescricao obj) {
-		find(obj.getId());
-		return repo.save(obj);
+		ProdutoDescricao newObj =  find(obj.getId());
+		updateDate(newObj, obj);
+		
+		return repo.save(newObj);
 	}
+
 
 	public void delete(Integer id) {
 		find(id);
@@ -62,4 +65,8 @@ public class ProdutoDescricaoService {
 		return new ProdutoDescricao(objDto.getId(),objDto.getDescricao());
 	}
 	
+	private void updateDate(ProdutoDescricao newObj, ProdutoDescricao obj) {
+		newObj.setDescricao(obj.getDescricao());
+		
+	}
 }

@@ -48,7 +48,7 @@ public class ProdutoDescricao implements Serializable {
 		return descricao;
 	}
 
-	public void setDescricacao(String descricao) {
+	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
 
