@@ -25,11 +25,11 @@ public class Usuario implements Serializable {
 	private String senha;
 
 	
-	@OneToMany(mappedBy = "usuario")
+	@OneToMany(mappedBy = "usuario",cascade=CascadeType.ALL)
 	private List<Telefone> telefones = new ArrayList<>();
 	
 	
-	@OneToMany(mappedBy = "usuario")
+	@OneToMany(mappedBy = "usuario",cascade=CascadeType.ALL)
 	private List<UsuarioEmail> usuarioEmails = new ArrayList<>();
 	
 	@OneToOne(cascade=CascadeType.ALL,mappedBy="usuario")
