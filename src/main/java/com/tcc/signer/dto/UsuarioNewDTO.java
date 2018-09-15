@@ -11,12 +11,19 @@ public class UsuarioNewDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	
+	@NotEmpty(message="preenchimento obrigatorio")
+	@Email(message="Email invalido")
 	private String login;
+	@NotEmpty(message="preenchimento obrigatorio")
+	@Length(min=5,max=120, message="Tamanho deve ser entre 5 e 120 caracteres")
 	private String senha;
 	
+	@Email(message="Email invalido")
 	private String email;
 	private String descricao;
 	
+	@NotEmpty(message="preenchimento obrigatorio")
+	@Length(min=8,max=12, message="Tamanho deve ser entre 8 e 12 caracteres")
 	private String tel1;
 	private String tel2;
 	private String tel3;
