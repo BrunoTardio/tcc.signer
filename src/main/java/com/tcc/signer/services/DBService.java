@@ -82,8 +82,8 @@ public class DBService {
 		statusPedidoRepository.save(sp2);
 
 		// TESTANDO UM PARA MUITOS 000
-		Usuario user1 = new Usuario(null, "tardio@", "123");
-		Usuario user2 = new Usuario(null, "xxxxx@", "123");
+		Usuario user1 = new Usuario(null, "tardio@tar", "123");
+		Usuario user2 = new Usuario(null, "xxxxx@tarr", "123");
 		Telefone t1 = new Telefone(null, "329889992896", "residencial", user1);
 		UsuarioEmail ue1 = new UsuarioEmail(null, "Seu@seu", "Trabalho", user1);
 
