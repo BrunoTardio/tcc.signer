@@ -73,7 +73,8 @@ public class ItemPedido implements Serializable{
 	 public Produto getProduto(){
 		 return id.getProduto();
 	 }
-
+	 
+	 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -97,6 +98,19 @@ public class ItemPedido implements Serializable{
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append(getProduto().getNome());
+		builder.append(", Qtd: ");
+		builder.append(getQuantidade());
+		builder.append(", Preco Unitário: ");
+		builder.append(getPreco());
+		builder.append("\n");
+	
+		return builder.toString();
 	}
 	
 }

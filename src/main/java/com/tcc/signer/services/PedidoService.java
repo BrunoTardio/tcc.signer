@@ -1,6 +1,7 @@
 package com.tcc.signer.services;
 
 
+import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,5 +21,24 @@ public class PedidoService {
 		Optional<Pedido> obj = repo.findById(id);
 		return  obj.orElse(null);
 	}
+	
+	
+	public Pedido insert(Pedido obj) {
+		obj.setId(null);
+		obj.setInstante(new Date());
+		return obj;
+		
+		
+		
+		
+	}
+		
+		
+		
+	
+	
+	
+	
+	
 
 }
