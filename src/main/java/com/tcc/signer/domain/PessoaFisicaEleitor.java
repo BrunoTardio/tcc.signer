@@ -18,11 +18,11 @@ public class PessoaFisicaEleitor implements Serializable{
 	
 	@Id
 	private String id;
-	private String EleitorNumero;
-	private String EleitorSecao;
-	private String EleitorZona;
-	private String EleitorCidade;
-	private String EleitorUF;
+	private String eleitorNumero;
+	private String eleitorSecao;
+	private String eleitorZona;
+	private String eleitorCidade;
+	private String eleitorUF;
 	
 	@JsonIgnore
 	@OneToOne
@@ -36,11 +36,11 @@ public class PessoaFisicaEleitor implements Serializable{
 			String eleitorCidade, String eleitorUF,PessoaFisica pessoaFisica) {
 		super();
 		this.id = id;
-		this.EleitorNumero = eleitorNumero;
-		this.EleitorSecao = eleitorSecao;
-		this.EleitorZona = eleitorZona;
-		this.EleitorCidade = eleitorCidade;
-		this.EleitorUF = eleitorUF;
+		this.eleitorNumero = eleitorNumero;
+		this.eleitorSecao = eleitorSecao;
+		this.eleitorZona = eleitorZona;
+		this.eleitorCidade = eleitorCidade;
+		this.eleitorUF = eleitorUF;
 		this.pessoaFisica = pessoaFisica;
 	}
 
@@ -53,43 +53,43 @@ public class PessoaFisicaEleitor implements Serializable{
 	}
 
 	public String getEleitorNumero() {
-		return EleitorNumero;
+		return eleitorNumero;
 	}
 
 	public void setEleitorNumero(String eleitorNumero) {
-		EleitorNumero = eleitorNumero;
+		eleitorNumero = eleitorNumero;
 	}
 
 	public String getEleitorSecao() {
-		return EleitorSecao;
+		return eleitorSecao;
 	}
 
 	public void setEleitorSecao(String eleitorSecao) {
-		EleitorSecao = eleitorSecao;
+		eleitorSecao = eleitorSecao;
 	}
 
 	public String getEleitorZona() {
-		return EleitorZona;
+		return eleitorZona;
 	}
 
 	public void setEleitorZona(String eleitorZona) {
-		EleitorZona = eleitorZona;
+		eleitorZona = eleitorZona;
 	}
 
 	public String getEleitorCidade() {
-		return EleitorCidade;
+		return eleitorCidade;
 	}
 
 	public void setEleitorCidade(String eleitorCidade) {
-		EleitorCidade = eleitorCidade;
+		eleitorCidade = eleitorCidade;
 	}
 
 	public String getEleitorUF() {
-		return EleitorUF;
+		return eleitorUF;
 	}
 
 	public void setEleitorUF(String eleitorUF) {
-		EleitorUF = eleitorUF;
+		eleitorUF = eleitorUF;
 	}
 
 	public PessoaFisica getPessoaFisica() {

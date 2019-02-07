@@ -13,11 +13,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
-import com.tcc.signer.domain.ProdutoDescricao;
 import com.tcc.signer.domain.Telefone;
 import com.tcc.signer.domain.Usuario;
 import com.tcc.signer.domain.UsuarioEmail;
-import com.tcc.signer.domain.Usuario;
 import com.tcc.signer.dto.UsuarioDTO;
 import com.tcc.signer.dto.UsuarioNewDTO;
 import com.tcc.signer.repositories.TelefoneRepository;
@@ -68,7 +66,7 @@ public class UsuarioService {
 		try {
 			repo.deleteById(id);
 		} catch (DataIntegrityViolationException e) {
-			throw new DataIntegrityException("Existe Produtos atrelados a este Produto Descricao");
+			throw new DataIntegrityException("Existe Produtos atrelados a este usuario ");
 		}
 	}
 	

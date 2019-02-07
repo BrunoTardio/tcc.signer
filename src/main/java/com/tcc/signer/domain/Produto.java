@@ -28,7 +28,7 @@ public class Produto implements Serializable {
 	private Integer id;
 	private String nome;
 	private Double preco;
-	private Integer tipo;
+	private Integer tipo; // avaliar possibilidade de transformar em tabela
 
 	@JsonIgnore
 	@ManyToOne
