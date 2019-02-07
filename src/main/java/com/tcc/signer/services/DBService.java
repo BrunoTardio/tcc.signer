@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.tcc.signer.domain.ItemPedido;
@@ -41,6 +42,9 @@ public class DBService {
 	@Autowired
 	private StatusPedidoRepository statusPedidoRepository;
 
+	@Autowired
+	private BCryptPasswordEncoder pe;
+	
 	@Autowired
 	private ProdutoDescricaoRepository produtoDescricaoRepo;
 	@Autowired
@@ -82,8 +86,8 @@ public class DBService {
 		statusPedidoRepository.save(sp2);
 
 		// TESTANDO UM PARA MUITOS 000
-		Usuario user1 = new Usuario(null, "tardio@tar", "123");
-		Usuario user2 = new Usuario(null, "xxxxx@tarr", "123");
+		Usuario user1 = new Usuario(null, "tardio@tar", pe.encode("123"));
+		Usuario user2 = new Usuario(null, "xxxxx@tarr", pe.encode("123"));
 		Telefone t1 = new Telefone(null, "329889992896", "residencial", user1);
 		UsuarioEmail ue1 = new UsuarioEmail(null, "Seu@seu", "Trabalho", user1);
 

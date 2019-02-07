@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -24,6 +25,7 @@ public class Usuario implements Serializable {
 	private Integer id;
 	@Column(unique=true)
 	private String login;
+	@JsonIgnore
 	private String senha;
 
 	

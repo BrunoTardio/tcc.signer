@@ -11,6 +11,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.tcc.signer.domain.Telefone;
@@ -26,7 +27,10 @@ import com.tcc.signer.services.exceptions.DataIntegrityException;
 
 @Service
 public class UsuarioService {
-
+	
+	@Autowired
+	private BCryptPasswordEncoder pe;
+	
 	@Autowired
 	private UsuarioRepository repo;
 	
@@ -90,7 +94,7 @@ public class UsuarioService {
 		// se for LISTA usa o optional , se for unico findone - 1 pra 1
 		// Optional<Telefone> tel = repoTel.findById(objDto.getTelefoneId());
 		// ex : cidade vem codigo - ver video aula // se tiver enum usar toEnum().
-		Usuario user = new Usuario(null, objDto.getLogin(), objDto.getSenha());
+		Usuario user = new Usuario(null, objDto.getLogin(),pe.encode(objDto.getSenha()));
 		Telefone tel1 = new Telefone(null, objDto.getTel1(), objDto.getDescricao(), user);
 		UsuarioEmail email = new UsuarioEmail(null, objDto.getEmail(), objDto.getDescricao(), user);
 
