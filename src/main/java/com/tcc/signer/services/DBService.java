@@ -21,6 +21,7 @@ import com.tcc.signer.domain.Telefone;
 import com.tcc.signer.domain.Usuario;
 import com.tcc.signer.domain.UsuarioEmail;
 import com.tcc.signer.domain.enums.EstadoPagamento;
+import com.tcc.signer.domain.enums.Perfil;
 import com.tcc.signer.domain.enums.TipoProduto;
 import com.tcc.signer.repositories.ItemPedidoRepository;
 import com.tcc.signer.repositories.PagamentoRepository;
@@ -88,6 +89,9 @@ public class DBService {
 		// TESTANDO UM PARA MUITOS 000
 		Usuario user1 = new Usuario(null, "tardio@tar", pe.encode("123"));
 		Usuario user2 = new Usuario(null, "xxxxx@tarr", pe.encode("123"));
+		user2.addPerfil(Perfil.ADMIN);
+		
+		
 		Telefone t1 = new Telefone(null, "329889992896", "residencial", user1);
 		UsuarioEmail ue1 = new UsuarioEmail(null, "Seu@seu", "Trabalho", user1);
 

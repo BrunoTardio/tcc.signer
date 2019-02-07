@@ -2,11 +2,18 @@ package com.tcc.signer.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,6 +22,7 @@ import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.tcc.signer.domain.enums.Perfil;
 
 @Entity
 public class Usuario implements Serializable {
@@ -29,6 +37,11 @@ public class Usuario implements Serializable {
 	private String senha;
 
 	
+	@ElementCollection(fetch=FetchType.EAGER)
+	@CollectionTable(name="PERFIS")
+	private Set<Integer> perfis = new HashSet<>();
+	
+	
 	@OneToMany(mappedBy = "usuario",cascade=CascadeType.ALL)
 	private List<Telefone> telefones = new ArrayList<>();
 	
@@ -41,8 +54,12 @@ public class Usuario implements Serializable {
 	
 	@OneToOne(cascade=CascadeType.ALL,mappedBy="usuario")
 	private Funcionario funcionario;
+	
 
 	public Usuario() {
+		
+		// por padrao todo usuario eh um cliente
+		addPerfil(Perfil.CLIENTE);
 	}
 
 	public Usuario(Integer id, String login, String senha) {
@@ -92,6 +109,17 @@ public class Usuario implements Serializable {
 	public void setUsuarioEmails(List<UsuarioEmail> usuarioEmails) {
 		this.usuarioEmails = usuarioEmails;
 	}
+	
+	// retorna os perfils do usuario ja convertendo para numero
+	public Set<Perfil> getPerfis(){
+		return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
+		
+	}
+	
+	public void addPerfil(Perfil perfil) {
+		perfis.add(perfil.getCod());
+	}
+	
 
 	@Override
 	public int hashCode() {
