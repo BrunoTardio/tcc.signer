@@ -11,6 +11,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,6 +56,8 @@ public class ProdutoDescricaoResource {
 		return ResponseEntity.noContent().build();
 	}
 	
+	// pode autorizar o END POINT para que tipo de perfil pode acessar
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		service.delete(id);
