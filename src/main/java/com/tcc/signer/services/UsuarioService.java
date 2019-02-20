@@ -17,11 +17,14 @@ import org.springframework.stereotype.Service;
 import com.tcc.signer.domain.Telefone;
 import com.tcc.signer.domain.Usuario;
 import com.tcc.signer.domain.UsuarioEmail;
+import com.tcc.signer.domain.enums.Perfil;
 import com.tcc.signer.dto.UsuarioDTO;
 import com.tcc.signer.dto.UsuarioNewDTO;
 import com.tcc.signer.repositories.TelefoneRepository;
 import com.tcc.signer.repositories.UsuarioEmailRepository;
 import com.tcc.signer.repositories.UsuarioRepository;
+import com.tcc.signer.security.UserSS;
+import com.tcc.signer.services.exceptions.AuthorizationException;
 import com.tcc.signer.services.exceptions.DataIntegrityException;
 
 
@@ -42,6 +45,11 @@ public class UsuarioService {
 	
 
 	public Usuario find(Integer id) {
+		UserSS user = UserService.authenticated();
+		if(user == null || user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+			throw new AuthorizationException("ACESSO NEGADO");
+		}
+			
 		Optional<Usuario> obj = repo.findById(id);
 		return  obj.orElse(null);
 	}
