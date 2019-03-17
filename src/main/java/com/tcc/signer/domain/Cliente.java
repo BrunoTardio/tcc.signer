@@ -2,7 +2,9 @@ package com.tcc.signer.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -33,6 +35,8 @@ public class Cliente implements Serializable {
 	@JsonIgnore
 	@OneToMany(mappedBy = "cliente")
 	private List<PessoaJuridica> pessoasJuridicas = new ArrayList<>();
+	
+	//private Set<String> telefones = new HashSet<>();
 
 	public Cliente() {
 
